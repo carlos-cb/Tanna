@@ -1,0 +1,73 @@
+a:visited {
+    color: black;
+}
+a:hover{
+    text-decoration: none;
+}
+.nav{
+    height: 240px;
+}
+.rightlogo{
+    position: relative;
+    bottom: 40px;
+    float: right;
+}
+#header_search_wrapper_desktop{
+    float: right;
+}
+
+#search_mini_form .form-search #search {
+    font-size: 14px;
+    border: 1px solid #dfdfdf;
+}
+
+.rightlogo a{
+    color: #000;
+    font-size: 15px;
+    margin-right: 10px;
+    font-weight: 400;
+}
+.container h2.head {
+    padding: 20px 0;
+    line-height: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: url(../img/dotted-line.png) repeat-x 0 bottom;
+}
+.toplogo{
+    padding-top: 10px;
+    padding-bottom: 50px;
+}
+.toplogo a{
+    color: #999;
+    margin-right: 30px;
+    font-size: 13px;
+    font-weight: 600;
+}
+.centerlogo{
+
+}
+.centerlogo img{
+    text-align:center;
+    display:block;
+    margin: auto;
+}
+
+.menu{
+    margin-top: 40px;
+    font-family: Futura,Century Gothic,Gill Sans,Helvetica,Arial,sans-serif;
+}
+.menu ul{
+    padding: 0;
+}
+.menu ul li{
+    margin-right: 18px;
+    list-style:none;
+    float:left;
+}
+.menu a{
+    color: #999;
+}
+.menu a:hover{
+    color: #000;
+}

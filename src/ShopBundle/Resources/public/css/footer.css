@@ -1,0 +1,58 @@
+.follow {
+    margin:0 auto 20px auto;
+}
+.scrollToTop{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    cursor:pointer;
+    width:50px;
+    height:50px;
+    z-index:100;
+}
+
+
+footer {
+    font-size:1.1em;
+    height:50px;
+    margin:70px auto 100px auto;
+    border-top:solid 1px #ababab;
+    padding-top:40px;
+    position:relative;
+    text-align:center;
+    width: 85%;
+}
+footer .copyright{
+    font-family: Times, serif;
+    line-height: 20px;
+    padding-bottom: 20px;
+    letter-spacing: 0;
+}
+
+
+a.lien {
+    font-weight:normal;
+    font-size:1em;
+    color:#000;
+    margin: 0 10px;
+    position:relative;
+    z-index:24;
+    text-decoration:none
+}
+
+a.lien:hover{
+    z-index:25;
+}
+
+a.lien span{
+    display: none
+}
+
+a.lien:hover span{
+    display:block;
+    position:absolute;
+    bottom:35px; left:-50px; width:130px;
+    color:#000;
+    text-align: center;
+    font-weight:none;
+}

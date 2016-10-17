@@ -1,0 +1,46 @@
+.mainimg{
+    position: relative;
+}
+.mainimg img{
+    max-width: 100%;
+}
+.mainimg .words{
+    font-family: Times New Roman,serif;
+    font-size: 44px;
+    font-weight: 400;
+    font-style: italic;
+    color: #fff;
+    position: absolute;
+    top: 35%;
+    left: 42%;
+    z-index: 10;
+}
+
+.imglist img{
+    max-width: 100%;
+}
+.imglist{
+    text-align: center;
+}
+.product-info {
+    text-align: center;
+    font-size: 14px;
+    height: 70px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    text-transform: uppercase;
+    line-height: 14px;
+}
+.product-info a {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    color: black;
+    overflow: hidden;
+}
+.price {
+    margin-top: 5px;
+    color: black;
+    overflow: hidden;
+}

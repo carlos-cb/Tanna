@@ -1,0 +1,15 @@
+shop_homepage:
+    path:     /
+    defaults: { _controller: ShopBundle:Default:index }
+
+shop_productList:
+    path:     /productList
+    defaults: { _controller: ShopBundle:Default:productList }
+
+shop_productDetail:
+    path:     /productDetail
+    defaults: { _controller: ShopBundle:Default:productDetail }
+
+shop_cart:
+    path:     /cart
+    defaults: { _controller: ShopBundle:Default:cart }

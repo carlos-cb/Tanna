@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/shop/css/index.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    {% include 'ShopBundle:Public:header.html.twig' %}
+
+    <div class="container">
+
+        <div class="mainimg">
+            <img src="{{ asset('bundles/shop/img/main.jpg') }}">
+            <div class="words">
+                <h1>tannamoda.com</h1>
+                <h1>última semana</h1>
+                <div class="button-wrapper">
+                    <a href="" class=" button banner-button btn-light">COMPRAR AHORA</a>
+                </div>
+            </div>
+        </div>
+        <br><br><br><br>
+        <div class="row showcase">
+            <div class="col-md-6">
+                <a href=""><img src="{{ asset('bundles/shop/img/show1.jpg') }}"></a>
+            </div>
+            <div class="col-md-6">
+                <a href=""><img src="{{ asset('bundles/shop/img/show2.jpg') }}"></a>
+                <button id="anniu" class="button button-inverse">Comprar Ahora <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+                <hr class="featurette-divider">
+                <h1 class="ha1">Mejor Vendido En Tienda</h1>
+                <div class="col-md-6">
+                    <a href=""><img src="{{ asset('bundles/shop/img/show3.jpg') }}"></a>
+                </div>
+                <div class="col-md-6">
+                    <a href=""><img src="{{ asset('bundles/shop/img/show4.jpg') }}"></a>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </div>
+
+    {% include 'ShopBundle:Public:footer.html.twig' %}
+{% endblock %}

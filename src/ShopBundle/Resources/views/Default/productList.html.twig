@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/shop/css/productlist.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    {% include 'ShopBundle:Public:header.html.twig' %}
+
+    <div class="container">
+        <div class="mainimg">
+            <img src="{{ asset('bundles/shop/img/abrigo.jpg') }}">
+            <div class="words">
+                <h1>ABRIGOS</h1>
+            </div>
+        </div>
+        <br><br><br><br>
+        <div class="row imglist">
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <a href="{{ path('shop_productDetail') }}">
+                    <figure><img src="{{ asset('uploads/fotos/1.jpg') }}"></figure>
+                </a>
+                <div class="product-info">
+                    <a class="" href="">PLUMÍFERO CAPUCHA PELO</a>
+                    <div class="price _product-price"><span>69.95 EUR</span></div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <a href="{{ path('shop_productDetail') }}">
+                    <figure><img src="{{ asset('uploads/fotos/2.jpg') }}"></figure>
+                </a>
+                <div class="product-info">
+                    <a class="" href="">PLUMÍFERO CAPUCHA PELO</a>
+                    <div class="price _product-price"><span>69.95 EUR</span></div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <a href="">
+                    <figure><img src="{{ asset('uploads/fotos/3.jpg') }}"></figure>
+                </a>
+                <div class="product-info">
+                    <a class="" href="">PLUMÍFERO CAPUCHA PELO</a>
+                    <div class="price _product-price"><span>69.95 EUR</span></div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <a href="">
+                    <figure><img src="{{ asset('uploads/fotos/4.jpg') }}"></figure>
+                </a>
+                <div class="product-info">
+                    <a class="" href="">PLUMÍFERO CAPUCHA PELO</a>
+                    <div class="price _product-price"><span>69.95 EUR</span></div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <a href="">
+                    <figure><img src="{{ asset('uploads/fotos/3.jpg') }}"></figure>
+                </a>
+                <div class="product-info">
+                    <a class="" href="">PLUMÍFERO CAPUCHA PELO</a>
+                    <div class="price _product-price"><span>69.95 EUR</span></div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <a href="{{ path('shop_productDetail') }}">
+                    <figure><img src="{{ asset('uploads/fotos/5.jpg') }}"></figure>
+                </a>
+                <div class="product-info">
+                    <a class="" href="">ABRIGO BOTONADURA</a>
+                    <div class="price _product-price"><span>99,95 EUR</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'ShopBundle:Public:footer.html.twig' %}
+{% endblock %}

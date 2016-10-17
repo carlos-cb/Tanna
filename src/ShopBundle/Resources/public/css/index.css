@@ -1,0 +1,40 @@
+.mainimg{
+    position: relative;
+}
+.mainimg img{
+    max-width: 100%;
+}
+.mainimg .words{
+    font-family: Times New Roman,serif;
+    font-size: 44px;
+    font-weight: 400;
+    font-style: italic;
+    color: #fff;
+    position: absolute;
+    top: 45%;
+    right: 5%;
+    z-index: 10;
+}
+
+.showcase img{
+    max-width: 100%;
+    display: block;
+}
+.showcase{
+    text-align: center;
+}
+.showcase button#anniu{
+    text-align:center;
+    display:block;
+    margin: auto;
+    margin-top: 45px;
+    margin-bottom: 45px;
+}
+.showcase .ha1 {
+    margin-top: 45px;
+    font-size: 38px;
+    height: 2.5em;
+    color: #000;
+    font-family: Times New Roman,serif;
+    font-style: italic;
+}
