@@ -1,0 +1,28 @@
+user_index:
+    path:     /
+    defaults: { _controller: "ShopBundle:User:index" }
+    methods:  GET
+
+user_show:
+    path:     /{id}/show
+    defaults: { _controller: "ShopBundle:User:show" }
+    methods:  GET
+
+user_new:
+    path:     /new
+    defaults: { _controller: "ShopBundle:User:new" }
+    methods:  [GET, POST]
+
+user_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ShopBundle:User:edit" }
+    methods:  [GET, POST]
+
+user_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ShopBundle:User:delete" }
+    methods:  DELETE
+
+user_enable:
+    path:     /{id}/enable
+    defaults: { _controller: "ShopBundle:User:enable" }

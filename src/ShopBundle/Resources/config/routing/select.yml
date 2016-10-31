@@ -1,0 +1,11 @@
+select_new:
+    path:     /new
+    defaults: { _controller: "ShopBundle:Select:selectNew" }
+
+add_new:
+    path:     /addnew
+    defaults: { _controller: "ShopBundle:Select:addNew" }
+
+delete_new:
+    path:     /deletenew/{id}
+    defaults: { _controller: "ShopBundle:Select:deleteNew" }

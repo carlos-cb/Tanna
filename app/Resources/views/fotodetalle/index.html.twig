@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Fotodetalle list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fotodetalle</th>
+                <th>Descriptiones</th>
+                <th>Descriptionen</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fotodetalle in fotodetalles %}
+            <tr>
+                <td><a href="{{ path('fotodetalle_show', { 'id': fotodetalle.id }) }}">{{ fotodetalle.id }}</a></td>
+                <td>{{ fotodetalle.fotodetalle }}</td>
+                <td>{{ fotodetalle.descriptionEs }}</td>
+                <td>{{ fotodetalle.descriptionEn }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('fotodetalle_show', { 'id': fotodetalle.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('fotodetalle_edit', { 'id': fotodetalle.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('fotodetalle_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,157 @@
+{% extends 'ShopBundle:BackEnd:index.html.twig' %}
+
+{% block menuslide %}
+    <ul class="nav nav-sidebar">
+        <li><a href="{{ path('shop_homepage_admin') }}"><i class="fa fa-tachometer" aria-hidden="true"></i> &nbsp;Visión Genenal  <span class="sr-only">(current)</span></a></li>
+        <li><a href="#"><i class="fa fa-info" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;&nbsp;Informe</a></li>
+        <li><a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp; Análisis</a></li>
+    </ul>
+    <ul class="nav nav-sidebar">
+        <li><a href="{{ path('user_index') }}"><i class="fa fa-users" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Usuarios</a></li>
+        <li><a href="{{ path('category_index') }}"><i class="fa fa-columns" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Categorías</a></li>
+        <li><a href="{{ path('product_index') }}"><i class="fa fa-female" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Gestión de Productos</a></li>
+        <li><a href="{{ path('select_new') }}"><i class="fa fa-heart" aria-hidden="true"></i> &nbsp;&nbsp;Selección Nuevos</a></li>
+        <li class="active"><a href="{{ path('orderinfo_index') }}"><i class="fa fa-credit-card" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Pedidos</a></li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    {% if user is defined  %}
+        <h1 class="sub-header">Pedidos de Usuario: {{ user.username }}</h1>
+    {% else %}
+        <h1 class="sub-header">Gestión de Pedidos</h1>
+    {% endif %}
+    <br>
+    <div class="btn-group" id="fliter">
+        <button type="button" class="btn btn-default" id="todo">Todo</button>
+        <button type="button" class="btn btn-default" id="preparando">Preparando</button>
+        <button type="button" class="btn btn-default" id="entregando">Entregando</button>
+        <button type="button" class="btn btn-default" id="terminado">Terminado</button>
+        <button type="button" class="btn btn-default" id="cancelado">Cancelado</button>
+        <button type="button" class="btn btn-default" id="fallado">Pagando</button>
+    </div>
+    <br><br>
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Número de pedido</th>
+            <th>Estado del pedido</th>
+            <th>Nombre</th>
+            <th>Importe Total</th>
+            <th>Pago</th>
+            <th>Tiempo de generación</th>
+            <th>Pagado</th>
+            <th>Enviado</th>
+            <th>Completado</th>
+            <th>Operaciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for orderInfo in orderInfos %}
+            <tr>
+                <td>
+                    {{ orderInfo.id }}
+                    {% if "now"|date_modify("-1 day")|date("Y-m-d H:i") <  orderInfo.orderDate|date('Y-m-d H:i') %}
+                        <img src="{{ asset('bundles/shop/img/new-icon.png') }}" height="40px" width="80px">
+                    {% endif %}
+                </td>
+                <td><button id="estado" class="button button-tiny button-rounded
+                {% if orderInfo.state == 'preparando' %}button-highlight{% endif %}
+                {% if orderInfo.state == 'entregando' %}button-primary{% endif %}
+                {% if orderInfo.state == 'terminado' %}button-action{% endif %}
+                {% if orderInfo.state == 'cancelado' %}button-caution{% endif %}">{{ orderInfo.state|upper }}</button>
+                </td>
+                <td>{{ orderInfo.receiverName }}</td>
+                <td>{{ orderInfo.totalPrice|number_format(2, '.', ',') }} €</td>
+                <td>{{ orderInfo.payType }}</td>
+                <td>{% if orderInfo.orderDate %}{{ orderInfo.orderDate|date('Y-m-d H:i') }}{% endif %}</td>
+                <td>{% if orderInfo.isConfirmed %}
+                        <span class="button-wrap">
+                            <button class="button button-circle button-raised button-action">
+                                <i class="fa fa-check"></i>
+                            </button>
+                        </span>
+                    {% else %}
+                        <span class="button-wrap">
+                            <button class="button button-circle button-raised button-caution">
+                                <i class="fa fa-close"></i>
+                            </button>
+                        </span>
+                    {% endif %}</td>
+                <td>
+                    {% if orderInfo.isSended %}
+                        <span class="button-wrap">
+                            <button type="button" class="button button-circle button-raised button-action" data-toggle="tooltip" data-placement="bottom" title=" {{ orderInfo.envio }} ">
+                                <i class="fa fa-check"></i>
+                            </button>
+                        </span>
+                    {% else %}
+                        <span class="button-wrap">
+                        <a type="button" data-toggle="modal" data-target="#myModal{{ orderInfo.id }}" class="button button-circle button-raised button-caution">
+                            <i class="fa fa-close"></i>
+                        </a>
+                        </span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if orderInfo.isOver %}
+                        <span class="button-wrap">
+                            <button class="button button-circle button-raised button-action">
+                                <i class="fa fa-check"></i>
+                            </button>
+                        </span>
+                    {% else %}
+                        <span class="button-wrap">
+                            <a href="{{ path('orderinfo_success', { 'id': orderInfo.id }) }}" class="button button-circle button-raised button-caution" onclick="return confirm('Ha terminado el pedido?')">
+                                <i class="fa fa-close"></i>
+                            </a>
+                        </span>
+                    {% endif %}
+                </td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('orderinfo_show', { 'id': orderInfo.id }) }}" class="button button-tiny button-border button-rounded button-inverse">Detalles de Pedido</a>
+                        </li>
+                        <br>
+                        <li>
+                            <a href="{{ path('orderinfo_cancelled', { 'id': orderInfo.id }) }}" class="button button-tiny button-border button-rounded button-caution" onclick="return confirm('Cancelar este pedido?')">Cancelar</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal{{ orderInfo.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Datos de envío：</h4>
+                            <h4 class="modal-title" id="myModalLabel">Transportista y Número de envío</h4>
+                        </div>
+                        <form method="post" action="{{ path('orderinfo_delivered') }}">
+                            <div class="modal-body">
+                                <input name="numeroEnvio" type="text" class="form-control" required="required" placeholder="DHL, YX65800999221">
+                                <input type="hidden" name="orderInfoId" value="{{ orderInfo.id }}">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">OK</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+{% endblock %}

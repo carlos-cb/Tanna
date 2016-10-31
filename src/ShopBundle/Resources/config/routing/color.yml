@@ -1,0 +1,28 @@
+color_index:
+    path:     /
+    defaults: { _controller: "ShopBundle:Color:index" }
+    methods:  GET
+
+color_show:
+    path:     /{id}/show
+    defaults: { _controller: "ShopBundle:Color:show" }
+    methods:  GET
+
+color_new:
+    path:     /{product}/new
+    defaults: { _controller: "ShopBundle:Color:new" }
+    methods:  [GET, POST]
+
+color_edit:
+    path:     /{product}/{id}/edit
+    defaults: { _controller: "ShopBundle:Color:edit" }
+    methods:  [GET, POST]
+
+color_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ShopBundle:Color:delete" }
+    methods:  DELETE
+
+color_remove:
+    path:     /{id}/remove
+    defaults: { _controller: "ShopBundle:Color:remove" }

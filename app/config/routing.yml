@@ -5,3 +5,9 @@ shop:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+payum_all:
+    resource: "@PayumBundle/Resources/config/routing/all.xml"

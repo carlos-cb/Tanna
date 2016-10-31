@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/shop/css/cart.css') }}" />
+{% endblock %}
+
+{% block body %}
+
+    {% include 'ShopBundle:Public:header.html.twig' %}
+
+    <div class="container">
+    <section id="main" class="content-main" role="main">
+        <h2>LISTA DE PRODUCTOS</h2>
+        <br>
+        <section id="shop-cart-content" data-controller="shop/shop-cart-controller">
+            <form action="" method="POST" class="_shopCartForm">
+                <table class="order-table">
+                    <thead>
+                    <tr class="thead"><th>PRODUCTO</th>
+                        <th class="description">DESCRIPCIÓN</th>
+                        <th>COLOR</th>
+                        <th>TALLA</th>
+                        <th class="quantity">UNIDADES</th>
+                    </tr>
+                    </thead>
+                    <tbody id="shangpin">
+                    {% for orderItem in orderItems %}
+                        <tr id="order-item" class="order-item  _order-item-919231977">
+                            <td class="_detail">
+                                <a href="{{ path('shop_productDetail', { 'product': orderItem.product.id, 'colorId': 1 }) }}" target="_self">
+                                    <img src="{{ asset('uploads/fotos/' ~ orderItem.foto) }}" width="135px;">
+                                </a>
+                            </td>
+                            <td class="description _detail">
+                                <a href="{{ path('shop_productDetail', { 'product': orderItem.product.id, 'colorId': 1 }) }}" target="_self">
+                                    <span>{{ orderItem.product.productNameEs }}</span><br>Ref.&nbsp;{{ orderItem.product.code }}
+                                </a>
+                            </td>
+                            <td class="color">{{ orderItem.colorName }}</td>
+                            <td class="size">{{ orderItem.sizeName }}</td>
+                            <td class="quantity">
+                                <span class="_quantity" id="_unit">{{ orderItem.quantity }} </span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="anniu">
+                    <button class="button-secondary button-big FL _continue-shopping-btn"  style="width: 200px;" onclick="window.location.href='{{ path('shop_pedido') }}'" type="button"><span>VOLVER</span></button>
+                </div>
+            </form>
+        </section>
+    </section>
+    </div>
+
+    {% include 'ShopBundle:Public:footer.html.twig' %}
+{% endblock %}

@@ -1,0 +1,32 @@
+ShopBundle\Entity\Color:
+    type: entity
+    table: null
+    repositoryClass: ShopBundle\Repository\ColorRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        colorFoto:
+            type: string
+            length: 255
+        colorNameEs:
+            type: string
+            length: 255
+        colorNameEn:
+            type: string
+            length: 255
+    manyToOne:
+        product:
+            targetEntity: Product
+            inversedBy: colors
+            joinColumn:
+                name: product_id
+                referencedColumnName: id
+    oneToMany:
+        fotodetalles:
+            targetEntity: Fotodetalle
+            mappedBy: color
+    lifecycleCallbacks: {  }

@@ -1,0 +1,66 @@
+{% extends 'ShopBundle:BackEnd:index.html.twig' %}
+
+{% block menuslide %}
+    <ul class="nav nav-sidebar">
+        <li><a href="{{ path('shop_homepage_admin') }}"><i class="fa fa-tachometer" aria-hidden="true"></i> &nbsp;Visión Genenal  <span class="sr-only">(current)</span></a></li>
+        <li><a href="#"><i class="fa fa-info" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;&nbsp;Informe</a></li>
+        <li><a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp; Análisis</a></li>
+    </ul>
+    <ul class="nav nav-sidebar">
+        <li><a href="{{ path('user_index') }}"><i class="fa fa-users" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Usuarios</a></li>
+        <li><a href="{{ path('category_index') }}"><i class="fa fa-columns" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Categorías</a></li>
+        <li class="active"><a href="{{ path('product_index') }}"><i class="fa fa-female" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Gestión de Productos</a></li>
+        <li><a href="{{ path('select_new') }}"><i class="fa fa-heart" aria-hidden="true"></i> &nbsp;&nbsp;Selección Nuevos</a></li>
+        <li><a href="{{ path('orderinfo_index') }}"><i class="fa fa-credit-card" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Pedidos</a></li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <h1 class="sub-header">Gestión de Productos</h1>
+    <br>
+    <ul>
+        <li>
+            <a href="{{ path('product_new') }}" class="button button-rounded button-inverse">Crear Nuevo</a>
+        </li>
+    </ul>
+    <br>
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Código</th>
+            <th>Nombre de Producto ES</th>
+            <th>Nombre de Producto EN</th>
+            <th>Precio</th>
+            <th>Foto</th>
+            <th>Categoría</th>
+            <th>Mostrado</th>
+            <th>Operaciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.code }}</td>
+                <td>{{ product.productNameEs }}</td>
+                <td>{{ product.productNameEn }}</td>
+                <td>{{ product.price }}</td>
+                <td><a href="{{ asset('uploads/fotos/' ~ product.foto) }}"><img src="{{ asset('uploads/fotos/' ~ product.foto) }}" height="120px" width="100px"></a></td>
+                <td>{{ product.category.categoryNameEs }}</td>
+                <td>{% if product.isShow %}Sí{% else %}No{% endif %}<br>
+                    <a href="{{ path('product_changeShow', { 'id': product.id }) }}" class="button button-tiny button-highlight">Cambiar</a>
+                </td>
+                <td>
+                    <ul>
+                        <br>
+                        <li>
+                            <a href="{{ path('product_show', { 'id': product.id }) }}" class="button button-tiny button-action">Gestionar Mucho Más</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

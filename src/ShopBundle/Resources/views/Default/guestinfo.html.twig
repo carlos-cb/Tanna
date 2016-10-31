@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/shop/css/orderinfo.css') }}" />
+{% endblock %}
+
+{% block body %}
+
+    {% include 'ShopBundle:Public:header.html.twig' %}
+
+    <div class="container">
+        <div class="line mod">
+            <div class="unit size1of1">
+                <h2>Tramita pedido</h2>
+            </div>
+        </div>
+        <div class="line mod">
+            <div class="unit size1of1">
+                <div class="steps">
+                    <ul class="listH">
+                        <li class="act">1. ENVÍO</li>
+                        <li>2. PAGO</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ path('shop_cartToOrderinfo') }}" name="orderinfo">
+            <div class="line mod">
+                <div class="radioGroup">
+                    <h2>Método de envío</h2>
+                    <div style="display: none">
+                        <input id="radio-1" class="radio-custom" name="radio-group" type="radio" value="1">
+                        <label for="radio-1" class="radio-custom-label">Recoger en tienda: En la tienda que elijas en 2-3 días laborables. Gratuito</label>
+                    </div>
+                    <div>
+                        <input id="radio-2" class="radio-custom" name="radio-group" type="radio" value="2" checked>
+                        <label for="radio-2" class="radio-custom-label">Estándar: En 2-3 días laborables. 3,95 EUR, <span style="background: #000;color: #fff; margin-left:15px;">GRATUITO (PEDIDOS A PARTIR DE 30 EUR)</span></label>
+                    </div>
+                    <div>
+                        <input id="radio-3" class="radio-custom" name="radio-group" type="radio" value="3">
+                        <label for="radio-3" class="radio-custom-label">Express: En 24-48 horas (días laborables). 5,95 EUR</label>
+                    </div>
+                </div>
+            </div>
+            <div class="line mod">
+                <div class="radioGroup">
+                    <h2>DATOS DE CONTACTO</h2>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-8">
+                            <input name="email" type="email" class="form-control" id="inputemail" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputtel" class="col-sm-2 control-label">Teléfono</label>
+                        <div class="col-sm-8">
+                            <input name="phonenumber" type="text" class="form-control" id="inputtel" required="required">
+                        </div>
+                    </div>
+                    <h2>DATOS DE ENVÍO</h2>
+                    <div class="form-group">
+                        <label for="inputname" class="col-sm-2 control-label">Nombre</label>
+                        <div class="col-sm-8">
+                            <input name="name" type="text" class="form-control" id="inputname" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputfamilyname" class="col-sm-2 control-label">Apellidos</label>
+                        <div class="col-sm-8">
+                            <input name="familyname" type="text" class="form-control" id="inputfamilyname" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">Dirección</label>
+                        <div class="col-sm-8">
+                            <input name="address" type="text" class="form-control" id="inputaddress" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputpost" class="col-sm-2 control-label">Código postal</label>
+                        <div class="col-sm-8">
+                            <input name="postcode" type="text" class="form-control" id="inputpost" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputlocal" class="col-sm-2 control-label">Localidad</label>
+                        <div class="col-sm-8">
+                            <input name="city" type="text" class="form-control" id="inputlocal" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputprovince" class="col-sm-2 control-label">Provincia</label>
+                        <div class="col-sm-8">
+                            <input name="province" type="text" class="form-control" id="inputprovince" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-sm-2 control-label">País</label>
+                        <div class="col-sm-8">
+                            <p style="margin-top:12px;margin-left:20px;font-weight: bold;">España</p>
+                        </div>
+                    </div>
+                    <div style="position: relative; left: 50px;">
+                        <input type="checkbox" id="gerenshui" name="gerenshui" value="1" style="-webkit-appearance: checkbox!important;height: 30px; position: relative; top: 12px;">
+                        Quiero recibir información sobre las novedades de TannaModa en mi e-mail
+                    </div>
+                    <br><br>
+                    <div class="">
+                        <div class="unit size1of1">
+                            <div class="actions fLeft">
+                                <button id="backCheckoutShippingBt" type="button" value="Volver" class="button butBack butWhite gaViewEvent"
+                                        onclick="window.location.href='{{ path('shop_cart') }}'">
+                                    <span style="bottom: 0;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</span>
+                                </button>
+                            </div>
+                            <div class="actions fRight">
+                                <button id="checkoutPaymentBt" type="submit" value="FINALIZAR PEDIDO"
+                                        class="button butBlack authPayment gaTrack gaViewEvent" onclick="return checkform()">
+                                    <span style="bottom: 0">SEGUIR</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    {% include 'ShopBundle:Public:footer.html.twig' %}
+{% endblock %}
+        {% block javascripts %}
+            {{ parent() }}
+            <script src="{{ asset('bundles/shop/js/validation.js') }}"></script>
+        {% endblock %}

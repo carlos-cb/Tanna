@@ -10,11 +10,9 @@
     {% include 'ShopBundle:Public:header.html.twig' %}
 
     <div class="container">
-
         <section id="main" class="content-main" role="main">
-
             <section id="shop-cart-content" data-controller="shop/shop-cart-controller">
-                <form action="//www.zara.com/es/es/shop/shipping/251514673" method="POST" class="_shopCartForm">
+                <form action="" method="POST" class="_shopCartForm">
                     <table class="order-table">
                         <thead>
                         <tr class="thead"><th>PRODUCTO</th>
@@ -27,49 +25,49 @@
                         </tr>
                         </thead>
                         <tbody id="shangpin">
-
+                        {% for cartItem in cartItems %}
                             <tr id="order-item" class="order-item  _order-item-919231977">
                                 <td class="_detail">
-                                    <a href="" target="_self">
-                                        <img src="{{ asset('uploads/fotos/5_3.jpg') }}" width="135px;">
+                                    <a href="{{ path('shop_productDetail', { 'product': cartItem.product.id, 'colorId': 1 }) }}" target="_self">
+                                        <img src="{{ asset('uploads/fotos/' ~ cartItem.foto) }}" width="135px;">
                                     </a>
                                 </td>
                                 <td class="description _detail">
-                                    <a href="" target="_self">
-                                        <span>ABRIGO BOTONADURA</span><br><br>Ref.&nbsp;7635/744
+                                    <a href="{{ path('shop_productDetail', { 'product': cartItem.product.id, 'colorId': 1 }) }}" target="_self">
+                                        <span>{{ cartItem.product.productNameEs }}</span><br><br>Ref.&nbsp;{{ cartItem.product.code }}
                                     </a>
                                 </td>
-                                <td class="color"> Negro </td>
-                                <td class="size"> S </td>
+                                <td class="color"> {{ cartItem.colorName }} </td>
+                                <td class="size"> {{ cartItem.sizeName }} </td>
                                 <td class="quantity">
-                                    <span class="_quantity" id="_quantity">2</span>
-                                    <span id="cartItemId" style="display: none"></span>
-                                    <span id="priceunit" style="display: none"></span>
-                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="minnum" data-path=""><i class="fa fa-minus" aria-hidden="true"></i></a>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;<a class="addnum" data-path=""><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                    <span class="_quantity" id="_quantity">{{ cartItem.quantity }}</span>
+                                    <span id="cartItemId" style="display: none">{{ cartItem.id }}</span>
+                                    <span id="priceunit" style="display: none">{{ cartItem.product.price }}</span>
+                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="minnum" data-path="{{ path('cart_update') }}"><i class="fa fa-minus" aria-hidden="true"></i></a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<a class="addnum" data-path="{{ path('cart_update') }}"><i class="fa fa-plus" aria-hidden="true"></i></a>
                                 </span>
                                 </td>
-                                <td class="price"><span id="heji">199.90</span> EUR</td>
+                                <td class="price"><span id="heji"></span> EUR</td>
                                 <td class="delete">
-                                    <a style="float: right;padding-right: 10px; font-size: 16px;" href="">
+                                    <a style="float: right;padding-right: 10px; font-size: 16px;" href="{{ path('cart_cartitem_delete', { 'id': cartItem.id }) }}">
                                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                                     </a>
                                 </td>
                             </tr>
-
+                        {% endfor %}
                         </tbody>
                         <tfoot>
                         <tr>
                             <th colspan="6" class="order-items-total" scope="row">Total de productos:</th>
-                            <td class="order-items-total" headers="priceHeader"><span id="totalprice">199.90</span> EUR</td>
+                            <td class="order-items-total" headers="priceHeader"><span id="totalprice"></span> EUR</td>
                         </tr>
                         <tr>
                             <th class="order-delivery-costs" colspan="6" scope="row">Gastos de envío estimados:</th>
-                            <td class="order-delivery-costs" headers="priceHeader">3,00 EUR</td>
+                            <td class="order-delivery-costs" headers="priceHeader">0,00 EUR</td>
                         </tr>
                         <tr class="total">
                             <th colspan="6" scope="row"><strong>Total:</strong></th>
-                            <td class="order-total" headers="priceHeader"><span id="total">202.90</span> EUR</td>
+                            <td class="order-total" headers="priceHeader"><span id="total"></span> EUR</td>
                         </tr>
                         <tr class="order-vat-costs">
                             <th colspan="6" scope="row">
@@ -80,13 +78,14 @@
                         </tfoot>
                     </table>
                     <div>
-                        <p>Devoluciones y reembolso: Tiene una semana para cancelar o devolver tu pedido.
+                        <p>* La cantidad mínima de comprar un producto en tannamoda.com es 2.
+                            <br><br>Devoluciones y reembolso: Tiene una semana para cancelar o devolver tu pedido.
                             <br>Antes de todo, póngase en contacto con nosotros.
                             <br>Lee más sobre nuestra política de devoluciones y reembolso.</p>
                     </div>
                     <div class="anniu">
-                        <button class="button-secondary button-big FL _continue-shopping-btn" type="button" onclick="window.location.href=''"><span>SEGUIR COMPRANDO</span></button>
-                        <button class="button-primary button-big FR" onclick="window.location.href=''" type="button"><span>Continuar</span></button>
+                        <button class="button-secondary button-big FL _continue-shopping-btn" type="button" onclick="window.location.href='{{ path('shop_productList_new') }}'"><span>SEGUIR COMPRANDO</span></button>
+                        <button class="button-primary button-big FR" onclick="window.location.href='{{ path('shop_guestinfo') }}'" type="button"><span>Continuar</span></button>
                     </div>
                 </form>
             </section>
@@ -95,4 +94,9 @@
     </div>
 
     {% include 'ShopBundle:Public:footer.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/shop/js/cart.js') }}"></script>
 {% endblock %}

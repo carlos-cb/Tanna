@@ -1,0 +1,26 @@
+ShopBundle\Entity\Category:
+    type: entity
+    table: null
+    repositoryClass: ShopBundle\Repository\CategoryRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        categoryNameEs:
+            type: string
+            length: 255
+        categoryNameEn:
+            type: string
+            length: 255
+        description:
+            type: string
+            length: 255
+            nullable: true
+    oneToMany:
+        products:
+            targetEntity: Product
+            mappedBy: category
+    lifecycleCallbacks: {  }

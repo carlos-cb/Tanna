@@ -1,0 +1,320 @@
+{% extends 'ShopBundle:BackEnd:index.html.twig' %}
+
+{% block menuslide %}
+    <ul class="nav nav-sidebar">
+        <li><a href="{{ path('shop_homepage_admin') }}"><i class="fa fa-tachometer" aria-hidden="true"></i> &nbsp;Visión Genenal  <span class="sr-only">(current)</span></a></li>
+        <li><a href="#"><i class="fa fa-info" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;&nbsp;Informe</a></li>
+        <li><a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp; Análisis</a></li>
+    </ul>
+    <ul class="nav nav-sidebar">
+        <li><a href="{{ path('user_index') }}"><i class="fa fa-users" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Usuarios</a></li>
+        <li><a href="{{ path('category_index') }}"><i class="fa fa-columns" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Categorías</a></li>
+        <li class="active"><a href="{{ path('product_index') }}"><i class="fa fa-female" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Gestión de Productos</a></li>
+        <li><a href="{{ path('select_new') }}"><i class="fa fa-heart" aria-hidden="true"></i> &nbsp;&nbsp;Selección Nuevos</a></li>
+        <li><a href="{{ path('orderinfo_index') }}"><i class="fa fa-credit-card" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Pedidos</a></li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <h1 class="sub-header">Datos Básicos</h1>
+    <br>
+    <ul>
+        <li>
+            <a href="{{ path('product_index') }}" class="button">Volover</a>
+        </li>
+    </ul>
+    <br>
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Código</th>
+            <th>Nombre de Producto ES</th>
+            <th>Nombre de Producto EN</th>
+            <th>Precio</th>
+            <th>Código</th>
+            <th>Foto</th>
+            <th>Categoría</th>
+            <th>Mostrado</th>
+            <th>Operaciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.code }}</td>
+            <td>{{ product.productNameEs }}</td>
+            <td>{{ product.productNameEn }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.code }}</td>
+            <td><a href="{{ asset('uploads/fotos/' ~ product.foto) }}"><img src="{{ asset('uploads/fotos/' ~ product.foto) }}" height="120px" width="100px"></a></td>
+            <td>{{ product.category.categoryNameEs }}</td>
+            <td>{% if product.isShow %}Sí{% else %}No{% endif %}</td>
+            <td>
+                <ul>
+                    <br>
+                    <li>
+                        <a href="{{ path('product_edit', { 'id': product.id }) }}" class="button button-tiny button-primary">Modificar</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <h1 class="sub-header">Lista de Colores</h1>
+    <br>
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre de Color ES</th>
+            <th>Nombre de Color EN</th>
+            <th>Foto de Color Principal</th>
+            <th>Operaciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for color in colors %}
+            <tr>
+                <td>{{ color.id }}</td>
+                <td>{{ color.colorNameEs }}</td>
+                <td>{{ color.colorNameEn }}</td>
+                <td><a href="{{ asset('uploads/fotos/' ~ color.colorFoto) }}"><img src="{{ asset('uploads/fotos/' ~ color.colorFoto) }}" height="120px" width="100px"></a></td>
+                <td>
+                    <ul>
+                        <br>
+                        <li>
+                            <a href="{{ path('color_edit', { 'id': color.id, 'product': product.id }) }}" class="button button-tiny button-primary">Modificar</a>
+                        </li>
+                        <br>
+                        <li>
+                            <a href="{{ path('color_remove', { 'id': color.id }) }}" class="button button-tiny button-highlight" onclick="return confirm('Ojo, va a borrar el color y también las fotodetalles de este color. ¿Desea borrar?')">Borrar</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <ul>
+        <li>
+            <a href="{{ path('color_new', { 'product': product.id }) }}" class="button button-inverse">Crear Color Nuevo</a>
+        </li>
+    </ul>
+
+    <br><br>
+    <div id="fotodetalles">
+        <h1 class="sub-header">Lista de Fotodetalles</h1>
+        <br>
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Color</th>
+                <th>Descripción ES</th>
+                <th>Descripción EN</th>
+                <th>Foto Detalle</th>
+                <th>Operaciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for fotodetalle in fotodetalles %}
+                <tr>
+                    <td>{{ fotodetalle.id }}</td>
+                    <td>{{ fotodetalle.color.colorNameEs }}</td>
+                    <td>{{ fotodetalle.descriptionEs }}</td>
+                    <td>{{ fotodetalle.descriptionEn }}</td>
+                    <td><a href="{{ asset('uploads/fotos/' ~ fotodetalle.fotodetalle) }}"><img src="{{ asset('uploads/fotos/' ~ fotodetalle.fotodetalle) }}" height="120px" width="100px"></a></td>
+                    <td>
+                        <ul>
+                            <br>
+                            <li>
+                                <a href="{{ path('fotodetalle_edit', { 'id': fotodetalle.id, 'product': product.id }) }}" class="button button-tiny button-primary">Modificar</a>
+                            </li>
+                            <br>
+                            <li>
+                                <a href="{{ path('fotodetalle_remove', { 'id': fotodetalle.id }) }}" class="button button-tiny button-highlight" onclick="return confirm('¿Desea borrar?')">Borrar</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <ul>
+            <li>
+                <a href="{{ path('fotodetalle_new', { 'id': product.id }) }}" class="button button-inverse">Crear FotoDetalle Nuevo</a>
+            </li>
+        </ul>
+    </div>
+
+    <br><br>
+    <div id="tallas">
+        <h1 class="sub-header">Lista de Tallas</h1>
+        <br>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Tallas</th>
+                    <th>Única</th>
+                    <th>XS</th>
+                    <th>S</th>
+                    <th>M</th>
+                    <th>L</th>
+                    <th>XL</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Mostrado</th>
+                    {% set foo1 = 0 %}
+                    {% set foo2 = 0 %}
+                    {% set foo3 = 0 %}
+                    {% set foo4 = 0 %}
+                    {% set foo5 = 0 %}
+                    {% set foo6 = 0 %}
+
+                    {% for size in sizes %}
+                        {% if size.sizeName == 'Única' %}
+                            {% set foo1 = 1 %}
+                            <th>
+                          <span class="button-wrap">
+                            <a class="button button-circle button-raised button-action" href="{{ path('size_min', { 'product': product.id, 'size': size.id }) }}">
+                                <i class="fa fa-check"></i>
+                            </a>
+                          </span>
+                            </th>
+                        {% endif %}
+                    {% endfor %}
+                    {% if foo1 == 0 %}
+                        <th>
+                      <span class="button-wrap">
+                        <a class="button button-circle button-raised button-caution" href="{{ path('size_add', { 'product': product.id, 'sizename': 'Única' }) }}">
+                            <i class="fa fa-close"></i>
+                        </a>
+                      </span>
+                        </th>
+                    {% endif %}
+
+                    {% for size in sizes %}
+                        {% if size.sizeName == 'XS' %}
+                            {% set foo2 = 1 %}
+                            <th>
+                          <span class="button-wrap">
+                            <a class="button button-circle button-raised button-action" href="{{ path('size_min', { 'product': product.id, 'size': size.id }) }}">
+                                <i class="fa fa-check"></i>
+                            </a>
+                          </span>
+                            </th>
+                        {% endif %}
+                    {% endfor %}
+                    {% if foo2 == 0 %}
+                        <th>
+                      <span class="button-wrap">
+                        <a class="button button-circle button-raised button-caution" href="{{ path('size_add', { 'product': product.id, 'sizename': 'XS' }) }}">
+                            <i class="fa fa-close"></i>
+                        </a>
+                      </span>
+                        </th>
+                    {% endif %}
+
+                    {% for size in sizes %}
+                        {% if size.sizeName == 'S' %}
+                            {% set foo3 = 1 %}
+                            <th>
+                          <span class="button-wrap">
+                            <a class="button button-circle button-raised button-action" href="{{ path('size_min', { 'product': product.id, 'size': size.id }) }}">
+                                <i class="fa fa-check"></i>
+                            </a>
+                          </span>
+                            </th>
+                        {% endif %}
+                    {% endfor %}
+                    {% if foo3 == 0 %}
+                        <th>
+                      <span class="button-wrap">
+                        <a class="button button-circle button-raised button-caution" href="{{ path('size_add', { 'product': product.id, 'sizename': 'S' }) }}">
+                            <i class="fa fa-close"></i>
+                        </a>
+                      </span>
+                        </th>
+                    {% endif %}
+
+                    {% for size in sizes %}
+                        {% if size.sizeName == 'M' %}
+                            {% set foo4 = 1 %}
+                            <th>
+                          <span class="button-wrap">
+                            <a class="button button-circle button-raised button-action" href="{{ path('size_min', { 'product': product.id, 'size': size.id }) }}">
+                                <i class="fa fa-check"></i>
+                            </a>
+                          </span>
+                            </th>
+                        {% endif %}
+                    {% endfor %}
+                    {% if foo4 == 0 %}
+                        <th>
+                      <span class="button-wrap">
+                        <a class="button button-circle button-raised button-caution" href="{{ path('size_add', { 'product': product.id, 'sizename': 'M' }) }}">
+                            <i class="fa fa-close"></i>
+                        </a>
+                      </span>
+                        </th>
+                    {% endif %}
+
+                    {% for size in sizes %}
+                        {% if size.sizeName == 'L' %}
+                            {% set foo5 = 1 %}
+                            <th>
+                          <span class="button-wrap">
+                            <a class="button button-circle button-raised button-action" href="{{ path('size_min', { 'product': product.id, 'size': size.id }) }}">
+                                <i class="fa fa-check"></i>
+                            </a>
+                          </span>
+                            </th>
+                        {% endif %}
+                    {% endfor %}
+                    {% if foo5 == 0 %}
+                        <th>
+                      <span class="button-wrap">
+                        <a class="button button-circle button-raised button-caution" href="{{ path('size_add', { 'product': product.id, 'sizename': 'L' }) }}">
+                            <i class="fa fa-close"></i>
+                        </a>
+                      </span>
+                        </th>
+                    {% endif %}
+
+                    {% for size in sizes %}
+                        {% if size.sizeName == 'XL' %}
+                            {% set foo6 = 1 %}
+                            <th>
+                          <span class="button-wrap">
+                            <a class="button button-circle button-raised button-action" href="{{ path('size_min', { 'product': product.id, 'size': size.id }) }}">
+                                <i class="fa fa-check"></i>
+                            </a>
+                          </span>
+                            </th>
+                        {% endif %}
+                    {% endfor %}
+                    {% if foo6 == 0 %}
+                        <th>
+                      <span class="button-wrap">
+                        <a class="button button-circle button-raised button-caution" href="{{ path('size_add', { 'product': product.id, 'sizename': 'XL' }) }}">
+                            <i class="fa fa-close"></i>
+                        </a>
+                      </span>
+                        </th>
+                    {% endif %}
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <br><br><br><br><br><br>
+{% endblock %}

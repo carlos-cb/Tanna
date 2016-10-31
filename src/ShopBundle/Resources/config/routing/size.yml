@@ -1,0 +1,33 @@
+size_index:
+    path:     /
+    defaults: { _controller: "ShopBundle:Size:index" }
+    methods:  GET
+
+size_show:
+    path:     /{id}/show
+    defaults: { _controller: "ShopBundle:Size:show" }
+    methods:  GET
+
+size_new:
+    path:     /new
+    defaults: { _controller: "ShopBundle:Size:new" }
+    methods:  [GET, POST]
+
+size_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ShopBundle:Size:edit" }
+    methods:  [GET, POST]
+
+size_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ShopBundle:Size:delete" }
+    methods:  DELETE
+
+size_add:
+    path:     /{product}/{sizename}/addSize
+    defaults: { _controller: "ShopBundle:Size:addSize" }
+
+size_min:
+    path:     /{product}/{size}/minSize
+    defaults: { _controller: "ShopBundle:Size:minSize" }
+

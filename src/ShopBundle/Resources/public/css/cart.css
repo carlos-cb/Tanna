@@ -177,6 +177,7 @@ caption, th, td {
     color: black;
     position: relative;
     border: 1px solid #000;
+    width: 230px;
 }
 .button-primary {
     display: inline-block;

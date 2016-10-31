@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/shop/css/cart.css') }}" />
+{% endblock %}
+
+{% block body %}
+
+    {% include 'ShopBundle:Public:header.html.twig' %}
+
+    <div class="container">
+    <section id="main" class="content-main" role="main">
+        <h2>MIS PEDIDOS</h2>
+        <br>
+        <section id="shop-cart-content" data-controller="shop/shop-cart-controller">
+            <form action="" method="POST" class="_shopCartForm">
+                <table class="order-table">
+                    <thead>
+                    <tr class="thead"><th>NÚMERO</th>
+                        <th class="description">FECHA</th>
+                        <th>ESTADO</th>
+                        <th>IMPORTE</th>
+                        <th>CóDIGO DE ENVíO</th>
+                        <th>ACCIONES</th>
+                    </tr>
+                    </thead>
+                    <tbody id="shangpin">
+                    {% for orderInfo in orderInfos %}
+                        <tr id="order-item" class="order-item  _order-item-919231977">
+                            <td class="_detail" style="height: 50px">{{ orderInfo.id }}</td>
+                            <td class="description _detail">{% if orderInfo.orderDate %}{{ orderInfo.orderDate|date('Y-m-d') }}{% endif %}</td>
+                            <td class="color">
+                                {{ orderInfo.state }}
+                                {% if orderInfo.state == 'pagando' %} &nbsp;&nbsp;&nbsp;<a href="{{ path('shop_orderpay', { 'orderInfo': orderInfo.id }) }}" class="button button-tiny button-inverse button-rounded">Pagar</a>{% endif %}
+                            </td>
+                            <td>{{ orderInfo.totalPrice }} EUR</td>
+                            <td>{% if orderInfo.envio %}{{ orderInfo.envio }}{% endif %}</td>
+                            <td>
+                                <a href="{{ path('shop_productlistclient', { 'orderInfo': orderInfo.id }) }}">Ver lista de productos</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </form>
+        </section>
+    </section>
+    </div>
+    {% include 'ShopBundle:Public:footer.html.twig' %}
+{% endblock %}

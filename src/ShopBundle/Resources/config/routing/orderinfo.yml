@@ -1,0 +1,40 @@
+orderinfo_index:
+    path:     /
+    defaults: { _controller: "ShopBundle:OrderInfo:index" }
+    methods:  GET
+
+orderinfo_indexUser:
+    path:     /user/{user}
+    defaults: { _controller: "ShopBundle:OrderInfo:indexUser" }
+
+orderinfo_show:
+    path:     /{id}/show
+    defaults: { _controller: "ShopBundle:OrderInfo:show" }
+    methods:  GET
+
+orderinfo_new:
+    path:     /new
+    defaults: { _controller: "ShopBundle:OrderInfo:new" }
+    methods:  [GET, POST]
+
+orderinfo_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ShopBundle:OrderInfo:edit" }
+    methods:  [GET, POST]
+
+orderinfo_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ShopBundle:OrderInfo:delete" }
+    methods:  DELETE
+
+orderinfo_delivered:
+    path:     /delivered
+    defaults: { _controller: "ShopBundle:OrderInfo:delivered" }
+
+orderinfo_success:
+    path:     /{id}/success
+    defaults: { _controller: "ShopBundle:OrderInfo:success" }
+
+orderinfo_cancelled:
+    path:     /{id}/cancelled
+    defaults: { _controller: "ShopBundle:OrderInfo:cancelled" }

@@ -1,0 +1,36 @@
+ShopBundle\Entity\Fotodetalle:
+    type: entity
+    table: null
+    repositoryClass: ShopBundle\Repository\FotodetalleRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        fotodetalle:
+            type: string
+            length: 255
+        descriptionEs:
+            type: string
+            length: 255
+            nullable: true
+        descriptionEn:
+            type: string
+            length: 255
+            nullable: true
+    manyToOne:
+        product:
+            targetEntity: Product
+            inversedBy: fotodetalles
+            joinColumn:
+                name: product_id
+                referencedColumnName: id
+        color:
+            targetEntity: Color
+            inversedBy: fotodetalles
+            joinColumn:
+                name: color_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

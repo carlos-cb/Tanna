@@ -1,0 +1,37 @@
+ShopBundle\Entity\CartItem:
+    type: entity
+    table: null
+    repositoryClass: ShopBundle\Repository\CartItemRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        quantity:
+            type: integer
+        colorId:
+            type: integer
+        colorName:
+            type: string
+            length: 255
+        sizeName:
+            type: string
+            length: 255
+        foto:
+            type: string
+            length: 255
+    manyToOne:
+        cart:
+            targetEntity: Cart
+            inversedBy: cartItems
+            joinColumn:
+                name: cart_id
+                referencedColumnName: id
+        product:
+            targetEntity: Product
+            joinColumn:
+                name: product_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

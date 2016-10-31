@@ -1,0 +1,28 @@
+fotodetalle_index:
+    path:     /
+    defaults: { _controller: "ShopBundle:Fotodetalle:index" }
+    methods:  GET
+
+fotodetalle_show:
+    path:     /{id}/show
+    defaults: { _controller: "ShopBundle:Fotodetalle:show" }
+    methods:  GET
+
+fotodetalle_new:
+    path:     /{id}/new
+    defaults: { _controller: "ShopBundle:Fotodetalle:new" }
+    methods:  [GET, POST]
+
+fotodetalle_edit:
+    path:     /{product}/{id}/edit
+    defaults: { _controller: "ShopBundle:Fotodetalle:edit" }
+    methods:  [GET, POST]
+
+fotodetalle_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ShopBundle:Fotodetalle:delete" }
+    methods:  DELETE
+
+fotodetalle_remove:
+    path:     /{id}/remove
+    defaults: { _controller: "ShopBundle:Fotodetalle:remove" }

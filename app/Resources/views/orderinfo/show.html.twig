@@ -1,0 +1,97 @@
+{% extends 'ShopBundle:BackEnd:index.html.twig' %}
+
+{% block menuslide %}
+    <ul class="nav nav-sidebar">
+        <li><a href="{{ path('shop_homepage_admin') }}"><i class="fa fa-tachometer" aria-hidden="true"></i> &nbsp;Visión Genenal  <span class="sr-only">(current)</span></a></li>
+        <li><a href="#"><i class="fa fa-info" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;&nbsp;Informe</a></li>
+        <li><a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp; Análisis</a></li>
+    </ul>
+    <ul class="nav nav-sidebar">
+        <li><a href="{{ path('user_index') }}"><i class="fa fa-users" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Usuarios</a></li>
+        <li><a href="{{ path('category_index') }}"><i class="fa fa-columns" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Categorías</a></li>
+        <li><a href="{{ path('product_index') }}"><i class="fa fa-female" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Gestión de Productos</a></li>
+        <li><a href="{{ path('select_new') }}"><i class="fa fa-heart" aria-hidden="true"></i> &nbsp;&nbsp;Selección Nuevos</a></li>
+        <li class="active"><a href="{{ path('orderinfo_index') }}"><i class="fa fa-credit-card" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Pedidos</a></li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <div style="text-align: center;">
+        <h1 class="sub-header">Detalles de Pedido</h1>
+    </div>
+    <br>
+    <table class="table-striped" width="100%">
+        <tbody>
+        <tr>
+            <th>Número de pedido</th>
+            <th>Importe</th>
+            <th>Gasto de envío</th>
+            <th>Importe Total</th>
+            <th>Método de envío</th>
+            <th>Tiempo de generación</th>
+        </tr>
+        <tr>
+            <td height="100">{{ orderInfo.id }}</td>
+            <td>{{ orderInfo.goodsFee|number_format(2, '.', ',') }} €</td>
+            <td>{{ orderInfo.shipFee|number_format(2, '.', ',') }} €</td>
+            <td>{{ orderInfo.totalPrice|number_format(2, '.', ',') }} €</td>
+            <td>{{ orderInfo.shipmode }}</td>
+
+            <td>{% if orderInfo.orderDate %}{{ orderInfo.orderDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Ciudad</th>
+            <th>Provincia</th>
+            <th>Código Postal</th>
+            <th>Dirección</th>
+        </tr>
+        <tr>
+            <td height="100">{{ orderInfo.receiverName }}</td>
+            <td>{{ orderInfo.receiverPhone }}</td>
+            <td>{{ orderInfo.receiverCity }}</td>
+            <td>{{ orderInfo.receiverProvince }}</td>
+            <td>{{ orderInfo.receiverPostcode }}</td>
+            <td>{{ orderInfo.receiverAdress }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Color</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Importe</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for orderItem in orderItems %}
+            <tr>
+                <td>{{ loop.index }}</a></td>
+                <td>{{ orderItem.product.code }}</td>
+                <td>{{ orderItem.product.productNameEs }}</td>
+                <td>{{ orderItem.colorName }}</td>
+                <td>{{ orderItem.quantity }}</td>
+                <td>{{ orderItem.product.price|number_format(2, '.', ',') }} €</td>
+                {% set foo = orderItem.quantity * orderItem.product.price %}
+                <td>{{ foo|number_format(2, '.', ',') }} €</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br><br>
+    <ul>
+        <li>
+            <a href="{{ path('orderinfo_index') }}" class="button button-rounded">Volover</a>
+            <button class="button button-rounded button-primary" onclick="window.print();"><i class="fa fa-print"></i> Imprimir</button>
+        </li>
+        <br>
+    </ul>
+
+{% endblock %}

@@ -7,29 +7,24 @@
         <div class="toplogo">
             <a>Bienvenido a tannamoda.com </a>
             {% if userNow is defined and userNow %}
-                <a href="" class="">HOLA, {{ userNow.username }}</a>
+                <a href="" class="">Hola, {{ userNow.username }}</a>
             {% else %}
-                <a href="" class="">iniciar sesión</a>
+                <a href="{{ path('fos_user_security_login') }}" class="">Iniciar sesión</a>
             {% endif %}
-            <a href="" class="">mis favoritos <i class="fa fa-heart-o" aria-hidden="true"></i></a>
-            <a href="" class="">Español</a>
+            <a href="{% if userNow is defined and userNow %}{{ path('shop_pedido') }}{% else %}{{ path('fos_user_security_login') }}{% endif %}" class="">Mis pedidos  <i class="fa fa-file-text-o" aria-hidden="true"></i></a>
         </div>
         <div class="centerlogo">
             <a href="/"><img id="centerlogo" src="{{ asset('bundles/shop/img/logo.png') }}"></a>
         </div>
         <div class="rightlogo">
-            <a href="{{ path('shop_cart') }}" class=""><i class="fa fa-shopping-bag"></i> &nbsp;&nbsp;&nbsp;&nbsp;MI CESTA</a>
+            <a href="{{ path('shop_cart') }}" class=""><i class="fa fa-shopping-bag"></i> &nbsp;&nbsp;MI CESTA</a>
         </div>
         <div class="menu">
             <ul class="category">
-                <li class="nuevo"><a href="">NOVEDADES</a></li>
-                <li class=""><a href="{{ path('shop_productList') }}">ABRIGOS</a></li>
-                <li class=""><a href="">BOMBEROS</a></li>
-                <li class=""><a href="">VESTIDOS</a></li>
-                <li class=""><a href="">CAMISAS</a></li>
-                <li class=""><a href="">PANTALONES</a></li>
-                <li class=""><a href="">SHORTS</a></li>
-                <li class=""><a href="">FALDAS</a></li>
+                <li class="nuevo"><a href="{{ path('shop_productList_new') }}">NOVEDADES</a></li>
+                {% for category in categories %}
+                    <li class=""><a href="{{ path('shop_productList', { 'category': category.id }) }}">{{ category.categoryNameEs }}</a></li>
+                {% endfor %}
             </ul>
             <div id="header_search_wrapper_desktop">
                 <div id="header-search" class="skip-content">

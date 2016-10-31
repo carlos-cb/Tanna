@@ -1,0 +1,28 @@
+ShopBundle\Entity\Cart:
+    type: entity
+    table: null
+    repositoryClass: ShopBundle\Repository\CartRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        cartState:
+            type: string
+            length: 255
+        createDate:
+            type: datetime
+    oneToOne:
+        user:
+            targetEntity: User
+            inversedBy: cart
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+    oneToMany:
+        cartItems:
+            targetEntity: CartItem
+            mappedBy: cart
+    lifecycleCallbacks: {  }

@@ -1,0 +1,11 @@
+shop_productList:
+    path:     /productList/{category}
+    defaults: { _controller: ShopBundle:Default:productList }
+
+shop_productList_new:
+    path:     /productListNew
+    defaults: { _controller: ShopBundle:Default:productListNew }
+
+shop_productDetail:
+    path:     /productDetail/{product}/{colorId}
+    defaults: { _controller: ShopBundle:Default:productDetail }

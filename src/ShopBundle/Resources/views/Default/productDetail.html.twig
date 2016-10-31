@@ -11,50 +11,63 @@
 
     <div class="container">
         <ol class="breadcrumb daohang">
-            <li><a href="#">INDEX</a></li>
-            <li><a href="#">ABRIGOS</a></li>
-            <li class="active">ABRIGO BOTONADURA</li>
+            <li><a href="{{ path('shop_homepage') }}">INDEX</a></li>
+            <li><a href="{{ path('shop_productList', { 'category': product.category.id }) }}">{{ product.category.categoryNameEs }}</a></li>
+            <li class="active">{{ product.productNameEs }}</li>
         </ol>
         <br><br><br>
         <div class="row">
             <div class="col-md-7 col-lg-7">
                 <div class="pageCenter">
                     <div class="thumbnails">
-                        <img onmouseover="preview.src=img1.src" name="img1" src="{{ asset('uploads/fotos/5_1.jpg') }}" alt="" />
-                        <img onmouseover="preview.src=img2.src" name="img2" src="{{ asset('uploads/fotos/5_2.jpg') }}" alt="" />
-                        <img onmouseover="preview.src=img3.src" name="img3" src="{{ asset('uploads/fotos/5_3.jpg') }}" alt="" />
-                        <img onmouseover="preview.src=img4.src" name="img4" src="{{ asset('uploads/fotos/5_4.jpg') }}" alt="" />
+                        <a href="{{ asset('uploads/fotos/' ~ color.colorFoto) }}" title="Detalle de Foto"  target="_blank">
+                            <img onmouseover="preview.src=img0.src" name="img0" src="{{ asset('uploads/fotos/' ~ color.colorFoto) }}" alt="" />
+                        </a>
+                        {% for fotodetalle in color.fotodetalles %}
+                            <a href="{{ asset('uploads/fotos/' ~ fotodetalle.fotodetalle) }}" title="Detalle de Foto"  target="_blank">
+                                <img onmouseover="preview.src=img{{ loop.index }}.src" name="img{{ loop.index }}" src="{{ asset('uploads/fotos/' ~ fotodetalle.fotodetalle) }}" alt="" />
+                            </a>
+                        {% endfor %}
                     </div>
                     <div class="preview" align="center">
-                        <img name="preview" src="{{ asset('uploads/fotos/5_3.jpg') }}" alt="" />
+                        <img name="preview" src="{{ asset('uploads/fotos/' ~ color.colorFoto) }}" alt="" />
                     </div>
                 </div>
             </div>
             <div class="col-md-4 col-md-offset-1 col-lg-4 col-lg-offset-1 purchase-column">
                 <section class="product-detail-purchase" data-module="productDetail, productDetailScrollSpy">
-                    <h1 class="product-name product-detail-product-name">ABRIGO BOTONADURA</h1>
+                    <h1 class="product-name product-detail-product-name">{{ product.productNameEs }}</h1>
                     <div class="product-price product-detail-price">
                         <div class="price-column product-detail-price-column">
                             <!-- // BUGFIX GR-3357  PDP - Fix mixed currency signs -->
-                            <span id="markedDown_full_Price" class="price">€ 99.95</span>
+                            <span id="markedDown_full_Price" class="price">€ {{ product.price }}</span>
                         </div>
                     </div>
                     <div class="product-info-wrapper">
                         <div class="style-number-title">
-                            Ref: <span> 7635/744</span>
+                            Ref: <span> {{ product.code }}</span>
                         </div>
-                        <div style="display: none" class="productid">1</div>
+                        <div style="display: none" class="productid">{{ product.id }}</div>
 
                         <div class="product-style-selector">
                             <div class="row" style="text-align: center">
+                                {% for color in product.colors %}
                                     <div class="col-lg-3 col-md-3 col-sm-3">
                                         <label class="_color">
-                                            <a class="group" rel="gallery1" href="">
-                                                <img src="{{ asset('uploads/fotos/5.jpg') }}" alt="" height="80px" style="border-style: solid;border-width: 2px;border-color: #6b6b6b;">
+                                            <a class="group" rel="gallery1" href="{{ path('shop_productDetail', { 'product': product.id, 'colorId': loop.index }) }}">
+                                                <img src="{{ asset('uploads/fotos/' ~ color.colorFoto) }}" alt="{{ color.colorNameEs }}" height="80px"
+                                                {% if colorId == loop.index %}
+                                                    style="border-style: solid;border-width: 2px;border-color: #6b6b6b;"
+                                                {% endif %}
+                                                >
                                             </a>
-                                            <span class="color-description"> NEGRO</span>
+                                            <span class="color-description">{{ color.colorNameEs|upper }}</span>
+                                            {% if colorId == loop.index %}
+                                                <div style="display: none" class="colorid">{{ color.id }}</div>
+                                            {% endif %}
                                         </label>
                                     </div>
+                                {% endfor %}
                             </div>
                         </div>
                         <br>
@@ -70,22 +83,24 @@
                             </div>
                             <div class="table-responsive sizetable">
                                 <div class="btn-group" id="size-group" data-toggle="buttons">
-
-                                        <label class="btn btn-default" id="" style="width: 100px">
-                                            <input type="radio" name="options" id="option" autocomplete="off"> S
+                                    {% for size in product.sizes %}
+                                        <label class="btn btn-default" id="{{ size.sizeName }}" style="width: {{ 300/product.sizes|length }}px">
+                                            <input type="radio" name="options" id="option" autocomplete="off"> {{ size.sizeName }}
                                         </label>
-                                    <label class="btn btn-default" id="" style="width: 100px">
-                                        <input type="radio" name="options" id="option" autocomplete="off"> M
-                                    </label>
-                                    <label class="btn btn-default" id="" style="width: 100px">
-                                        <input type="radio" name="options" id="option" autocomplete="off"> L
-                                    </label>
-
+                                    {% endfor %}
                                 </div>
                             </div>
                             <br><br><br>
                         </div>
-                        <button class="shopping-bag-cta add-to-shopping-bag various" type="submit">
+                        <p>* La cantidad mínima de comprar un producto en tannamoda.com es 2.</p>
+                        <br>
+                        <button class="shopping-bag-cta add-to-shopping-bag various" type="submit"
+                                {% if userNow %}
+                                    id="buy" data-path="{{ path('shop_addToCart') }}"
+                                {% else %}
+                                    onclick="window.location.href='{{ path('fos_user_security_login') }}'"
+                                {% endif %}
+                        >
                             Añadir a Bolsa de Compras</button>
                         <div class="save-help guardar" data-module="tooltip">
                             <ul>
@@ -102,10 +117,13 @@
                     </div>
                 </section>
             </div>
-
-
         </div>
     </div>
 
     {% include 'ShopBundle:Public:footer.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/shop/js/detalle.js') }}"></script>
 {% endblock %}

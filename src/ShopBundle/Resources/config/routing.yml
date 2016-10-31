@@ -1,15 +1,51 @@
+shop_user:
+    resource: "@ShopBundle/Resources/config/routing/user.yml"
+    prefix:   /admin/user
+
+shop_category:
+    resource: "@ShopBundle/Resources/config/routing/category.yml"
+    prefix:   /admin/category
+
+shop_color:
+    resource: "@ShopBundle/Resources/config/routing/color.yml"
+    prefix:   /admin/color
+
+shop_fotodetalle:
+    resource: "@ShopBundle/Resources/config/routing/fotodetalle.yml"
+    prefix:   /admin/fotodetalle
+
+shop_product:
+    resource: "@ShopBundle/Resources/config/routing/product.yml"
+    prefix:   /admin/product
+
+shop_size:
+    resource: "@ShopBundle/Resources/config/routing/size.yml"
+    prefix:   /admin/size
+
+shop_orderinfo:
+    resource: "@ShopBundle/Resources/config/routing/orderinfo.yml"
+    prefix:   /admin/orderinfo
+
+shop_orderitem:
+    resource: "@ShopBundle/Resources/config/routing/orderitem.yml"
+    prefix:   /admin/orderitem
+
+shop_select:
+    resource: "@ShopBundle/Resources/config/routing/select.yml"
+    prefix:   /admin/select
+
+shop_order:
+    resource: "@ShopBundle/Resources/config/routing/order.yml"
+    prefix:   /order
+
+shop_product_font:
+    resource: "@ShopBundle/Resources/config/routing/productfont.yml"
+    prefix:   /product_font
+
 shop_homepage:
     path:     /
     defaults: { _controller: ShopBundle:Default:index }
 
-shop_productList:
-    path:     /productList
-    defaults: { _controller: ShopBundle:Default:productList }
-
-shop_productDetail:
-    path:     /productDetail
-    defaults: { _controller: ShopBundle:Default:productDetail }
-
-shop_cart:
-    path:     /cart
-    defaults: { _controller: ShopBundle:Default:cart }
+shop_homepage_admin:
+    path:     /admin
+    defaults: { _controller: ShopBundle:Default:backEnd }

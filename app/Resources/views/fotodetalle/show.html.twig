@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Fotodetalle</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ fotodetalle.id }}</td>
+            </tr>
+            <tr>
+                <th>Fotodetalle</th>
+                <td>{{ fotodetalle.fotodetalle }}</td>
+            </tr>
+            <tr>
+                <th>Descriptiones</th>
+                <td>{{ fotodetalle.descriptionEs }}</td>
+            </tr>
+            <tr>
+                <th>Descriptionen</th>
+                <td>{{ fotodetalle.descriptionEn }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('fotodetalle_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('fotodetalle_edit', { 'id': fotodetalle.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

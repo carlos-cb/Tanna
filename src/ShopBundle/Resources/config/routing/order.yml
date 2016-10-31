@@ -1,0 +1,43 @@
+shop_cart:
+    path:     /cart
+    defaults: { _controller: ShopBundle:Default:cart }
+
+cart_update:
+    path:     /cart/updateNum
+    defaults: { _controller: ShopBundle:Default:ajaxUpdate }
+
+cart_cartitem_delete:
+    path:     /{id}/cartdelete
+    defaults: { _controller: ShopBundle:Default:cartdelete }
+
+shop_guestinfo:
+    path:     /guestinfo
+    defaults: { _controller: ShopBundle:Default:guestinfo }
+
+shop_orderpay:
+    path:     /orderpay/{orderInfo}
+    defaults: { _controller: ShopBundle:Order:orderpay }
+
+shop_cartToOrderinfo:
+    path:     /cartToOrderinfo
+    defaults: { _controller: ShopBundle:Order:cartToOrderinfo }
+
+shop_pedido:
+    path:     /pedido
+    defaults: { _controller: ShopBundle:Default:pedido }
+
+shop_productlistclient:
+    path:     /pedido/productlistclient/{orderInfo}
+    defaults: { _controller: ShopBundle:Default:productlistclient }
+
+shop_addToCart:
+    path:     /addToCart
+    defaults: { _controller: ShopBundle:Default:addToCart }
+
+payment_prepareStripe:
+    path:     /payment/prepareStripe/{orderInfo}
+    defaults: { _controller: ShopBundle:Payment:prepareStripe }
+
+payment_paymentDone:
+    path:     /payment/done
+    defaults: { _controller: ShopBundle:Payment:done }

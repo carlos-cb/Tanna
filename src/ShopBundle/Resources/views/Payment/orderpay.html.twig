@@ -1,0 +1,157 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/shop/css/orderinfo.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/shop/css/cart.css') }}" />
+{% endblock %}
+
+{% block body %}
+
+    {% include 'ShopBundle:Public:header.html.twig' %}
+
+    <div class="container">
+        <div class="line mod">
+            <div class="unit size1of1">
+                <h2>Tramita pedido</h2>
+                <p>Si necesitas ayuda puedes llamar a nuestro teléfono gratuito de atención al cliente: 900 814 900</p>
+            </div>
+        </div>
+        <div class="line mod">
+            <div class="unit size1of1">
+                <div class="steps">
+                    <ul class="listH">
+                        <li>1. ENVÍO</li>
+                        <li class="act">2. PAGO</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <form class="form-horizontal" method="post" enctype="multipart/form-data" action="" name="orderinfo">
+            <div class="line mod">
+                <div class="">
+                    <h2>Método de Pago</h2>
+                    <br><br><br>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a href="" style="position: relative; bottom: 40px;"><img width="315px" src="{{ asset('bundles/shop/img/paypal.png') }}"></a>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="{{ path('payment_prepareStripe', { 'orderInfo': orderInfo.id }) }}"><img src="{{ asset('bundles/shop/img/logostripe.png') }}"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="line mod">
+                <div class="unit size1of1">
+                    <div class="actions fLeft">
+                        <button id="backCheckoutShippingBt" type="button" value="Volver" class="button butBack butWhite gaViewEvent"
+                                onclick="window.location.href='{{ path('shop_pedido') }}'">
+                            <span style="bottom: 0"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</span>
+                        </button>
+                    </div>
+                    <div class="actions fRight">
+                        <button id="checkoutPaymentBt" type="submit" value="FINALIZAR PEDIDO"
+                                class="button butBlack authPayment gaTrack gaViewEvent">
+                            <span style="bottom: 0">FINALIZAR PEDIDO</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="line">
+            <div class="unit size1of1" style="width: 90%;">
+                <div class="section">
+                    <h3 class="titleSection">DETALLES DE TU PEDIDO</h3>
+                    <div class="line">
+                        <div class="unit size1of2 firstUnit">
+                            <label>Dirección de facturación</label>
+                            <div class="address">
+                                <br>
+                                <div><strong class="userName">{{ orderInfo.receiverFamilyName }}&nbsp;{{ orderInfo.receiverName }}</strong></div>
+                                <div class="userCountry">España</div>
+                                <div class="contact">
+                                    Móvil: <span class="userPhone">+34 {{ orderInfo.receiverPhone }}</span>
+                                </div>
+                                <input type="hidden" value="" class="billAddrZipCode">
+                            </div>
+                        </div>
+                        <div class="unit size1of2 lastUnit">
+                            <label>Dirección de envío</label>
+                            <div class="address">
+                                <div class="userAddress">{{ orderInfo.receiverAdress }}&nbsp;</div>
+                                <div class="userZip">
+                                    <span>{{ orderInfo.receiverPostcode }}     </span>&nbsp;
+                                    <span class="userCity">{{ orderInfo.receiverCity }}</span></div>
+                                <div class="userState">{{ orderInfo.receiverProvince }}</div>
+                                <div class="userCountry">España</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="line">
+            <table class="order-table">
+                <thead>
+                <tr class="thead"><th>PRODUCTO</th>
+                    <th class="description">DESCRIPCIÓN</th>
+                    <th class="description">DESCRIPCIÓN</th>
+                    <th>COLOR</th>
+                    <th>TALLA</th>
+                    <th class="quantity">UNIDADES</th>
+                    <th class="price" id="priceHeader">IMPORTE</th>
+                </tr>
+                </thead>
+                <tbody id="shangpin">
+                {% for orderItem in orderInfo.orderItems %}
+                    <tr id="order-item" class="order-item">
+                        <td class="_detail">
+                                <img src="{{ asset('uploads/fotos/' ~ orderItem.foto) }}" width="100px;">
+                        </td>
+                        <td class="description _detail">
+                                <span>{{ orderItem.product.productNameEs }}</span>
+                        </td>
+                        <td class="description _detail">
+                            <span>Ref.&nbsp;{{ orderItem.product.code }}</span>
+
+                        </td>
+                        <td class="color"> {{ orderItem.colorName }} </td>
+                        <td class="size"> {{ orderItem.sizeName }} </td>
+                        <td class="quantity">
+                            <span class="_quantity" id="_quantity">{{ orderItem.quantity }}</span>
+                            <span id="cartItemId" style="display: none">{{ orderItem.id }}</span>
+                            <span id="priceunit" style="display: none">{{ orderItem.product.price }}</span>
+                        </td>
+                        <td class="price"><span id="heji">{{ orderItem.product.price * orderItem.quantity|number_format(2, '.', ',') }}</span> EUR</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="6" class="order-items-total" scope="row">Total de productos:</th>
+                    <td class="order-items-total" headers="priceHeader"><span id="totalprice">{{ orderInfo.goodsFee|number_format(2, '.', ',') }}</span> EUR</td>
+                </tr>
+                <tr>
+                    <th class="order-delivery-costs" colspan="6" scope="row">Gastos de envío:</th>
+                    <td class="order-delivery-costs" headers="priceHeader">{{ orderInfo.shipFee|number_format(2, '.', ',') }} EUR</td>
+                </tr>
+                <tr class="total">
+                    <th colspan="6" scope="row"><strong>Total:</strong></th>
+                    <td class="order-total" headers="priceHeader"><span id="total">{{ orderInfo.totalPrice|number_format(2, '.', ',') }}</span> EUR</td>
+                </tr>
+                <tr class="order-vat-costs">
+                    <th colspan="6" scope="row">
+                        <span class="offleft">Impuestos</span>
+                    </th>
+                    <td headers="priceHeader"><em>* IVA incluido</em></td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+
+    {% include 'ShopBundle:Public:footer.html.twig' %}
+{% endblock %}

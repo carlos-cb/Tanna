@@ -1,0 +1,22 @@
+ShopBundle\Entity\Size:
+    type: entity
+    table: null
+    repositoryClass: ShopBundle\Repository\SizeRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        sizeName:
+            type: string
+            length: 255
+    manyToOne:
+        product:
+            targetEntity: Product
+            inversedBy: sizes
+            joinColumn:
+                name: product_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

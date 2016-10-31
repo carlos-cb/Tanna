@@ -1,0 +1,24 @@
+orderitem_index:
+    path:     /
+    defaults: { _controller: "ShopBundle:OrderItem:index" }
+    methods:  GET
+
+orderitem_show:
+    path:     /{id}/show
+    defaults: { _controller: "ShopBundle:OrderItem:show" }
+    methods:  GET
+
+orderitem_new:
+    path:     /new
+    defaults: { _controller: "ShopBundle:OrderItem:new" }
+    methods:  [GET, POST]
+
+orderitem_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ShopBundle:OrderItem:edit" }
+    methods:  [GET, POST]
+
+orderitem_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ShopBundle:OrderItem:delete" }
+    methods:  DELETE

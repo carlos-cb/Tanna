@@ -1,0 +1,69 @@
+{% extends 'ShopBundle:BackEnd:index.html.twig' %}
+
+{% block menuslide %}
+    <ul class="nav nav-sidebar">
+        <li><a href="{{ path('shop_homepage_admin') }}"><i class="fa fa-tachometer" aria-hidden="true"></i> &nbsp;Visión Genenal  <span class="sr-only">(current)</span></a></li>
+        <li><a href="#"><i class="fa fa-info" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;&nbsp;Informe</a></li>
+        <li><a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp; Análisis</a></li>
+    </ul>
+    <ul class="nav nav-sidebar">
+        <li class="active"><a href="{{ path('user_index') }}"><i class="fa fa-users" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Usuarios</a></li>
+        <li><a href="{{ path('category_index') }}"><i class="fa fa-columns" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Categorías</a></li>
+        <li><a href="{{ path('product_index') }}"><i class="fa fa-female" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Gestión de Productos</a></li>
+        <li><a href="{{ path('select_new') }}"><i class="fa fa-heart" aria-hidden="true"></i> &nbsp;&nbsp;Selección Nuevos</a></li>
+        <li><a href="{{ path('orderinfo_index') }}"><i class="fa fa-credit-card" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Pedidos</a></li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <h1 class="sub-header">Gestión de Usuarios</h1>
+    <br>
+    <ul>
+        <li>
+            <a href="{{ path('user_new') }}" class="button button-rounded button-inverse">Crear Nuevo</a>
+        </li>
+    </ul>
+    <br>
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Activado</th>
+            <th>Último acceso</th>
+            <th>Pedidos</th>
+            <th>Consumo Total</th>
+            <th>Regla de usuario</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    {% if user.enabled %}
+                        Sí <br>
+                        <a class="button button-tiny button-highlight" href="{{ path('user_enable', { 'id': user.id }) }}" onclick="return confirm('Desea desactivar esta cuenta?')">Desactivar</a>
+                    {% else %}
+                        No <br>
+                        <a class="button button-tiny button-primary" href="{{ path('user_enable', { 'id': user.id }) }}" onclick="return confirm('Desea activar esta cuenta?')">Activar</a>
+                    {% endif %}
+                </td>
+                <td>{% if user.lastLogin %}{{ user.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td><a class="button button-tiny button-primary" href="{{ path('orderinfo_indexUser', { 'user': user.id }) }}">Ver</a></td>
+                <td>{{ user.OrderInfoSum|number_format(2, '.', ',') }} €</td>
+                <td>
+                    <ul class="list">
+                        {%for role in user.roles %}
+                            <li>{% if role == 'ROLE_SUPER_ADMIN' %}Super Administrator{% else %}Usuario Normal{% endif %}</li>
+                        {%endfor%}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
