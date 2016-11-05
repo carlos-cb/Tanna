@@ -25,6 +25,42 @@ class DefaultController extends Controller
         ));
     }
     
+    public function avisoAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository('ShopBundle:Category')->findAll();
+        $userNow = $this->getUser();
+
+        return $this->render('ShopBundle:Info:aviso.html.twig', array(
+            'categories' => $categories,
+            'userNow' => $userNow,
+        ));
+    }
+
+    public function guiaAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository('ShopBundle:Category')->findAll();
+        $userNow = $this->getUser();
+
+        return $this->render('ShopBundle:Info:guia.html.twig', array(
+            'categories' => $categories,
+            'userNow' => $userNow,
+        ));
+    }
+
+    public function sobreAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository('ShopBundle:Category')->findAll();
+        $userNow = $this->getUser();
+
+        return $this->render('ShopBundle:Info:sobre.html.twig', array(
+            'categories' => $categories,
+            'userNow' => $userNow,
+        ));
+    }
+    
     public function productListAction(Category $category)
     {
         $em = $this->getDoctrine()->getManager();

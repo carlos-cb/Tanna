@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% include 'ShopBundle:Public:header.html.twig' %}
+
+    <div class="container">
+        <div class="row">
+            <div id="center_column" class="center_column col-xs-12 col-sm-12">
+                <div class="rte">
+                    <h1 class="page-heading bottom-indent">Sobre nosotros</h1>
+                    <hr class="featurette-divider">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="cms-block">
+                                <h3 class="page-subheading">Nuestra empresa</h3>
+                                <p><strong class="dark">Somos una empresa joven y dinámica siempre en expanxión.</strong></p>
+                                <p>Tanna Shop surgió para poder ofrecer un servicio Online de nuestras colecciones Tanna Moda. Con una experiencia notable en el sector, impulsamos cada temporada nuevas ideas y tendencias a nuestros clientes.</p>
+                                <ul class="list-1"><li><em class="icon-ok"></em>Productos de buena calidad</li>
+                                    <li><em class="icon-ok"></em>Un buen servicio de atención al cliente</li>
+                                    <li><em class="icon-ok"></em>Garantía de devolución en 30 días</li>
+                                </ul></div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="cms-box">
+                                <h3 class="page-subheading">Nuestro equipo</h3>
+                                <img title="cms-img" src="{{ asset('bundles/shop/img/tienda.jpg') }}" alt="cms-img" width="370" height="192"><p><strong class="dark">Más que un equipo, formamos una gran familia </strong></p>
+                                <p>Nuestro objetivo consiste en conseguir la satisfacción del cliente. Trabajamos en lo que nos gusta sin olvidar intentar superarnos cada dia.</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="cms-box"><br class="page-subheading"><p><strong class="dark">Tanna Shop - Tanna Moda - The Bayflower S.L.<br></strong></p>
+                                <ul class="toggle-footer" style="">
+                                    <li>
+                                        <i class="icon-map-marker"></i>Tanna Shop, C/ Astorga, 1 - Pol. Ind. Cobo Calleja 28947 Fuenlabrada-Madrid-España</li>
+                                    <li>
+                                        <i class="icon-phone"></i>Llámanos ahora:
+                                        <span>(+34) 916 421 638 </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div><!-- #center_column -->
+        </div>
+    </div>
+
+    {% include 'ShopBundle:Public:footer.html.twig' %}
+{% endblock %}

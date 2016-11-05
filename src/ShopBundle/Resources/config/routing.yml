@@ -42,6 +42,10 @@ shop_product_font:
     resource: "@ShopBundle/Resources/config/routing/productfont.yml"
     prefix:   /product_font
 
+shop_info:
+    resource: "@ShopBundle/Resources/config/routing/info.yml"
+    prefix:   /info
+
 shop_homepage:
     path:     /
     defaults: { _controller: ShopBundle:Default:index }

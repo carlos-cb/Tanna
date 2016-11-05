@@ -1,0 +1,11 @@
+aviso_legal:
+    path:     /avisolegal
+    defaults: { _controller: "ShopBundle:Default:aviso" }
+
+guia_compras:
+    path:     /guiacompras
+    defaults: { _controller: "ShopBundle:Default:guia" }
+
+sobre_nosotros:
+    path:     /sobrenosotros
+    defaults: { _controller: "ShopBundle:Default:sobre" }
