@@ -71,6 +71,7 @@ class DefaultController extends Controller
         $products = $query->getResult();
         
         return $this->render('ShopBundle:Default:productList.html.twig', array(
+            'category' => $category,
             'products' => $products,
             'categories' => $categories,
             'userNow' => $userNow,
@@ -83,10 +84,14 @@ class DefaultController extends Controller
         $categories = $em->getRepository('ShopBundle:Category')->findAll();
         $userNow = $this->getUser();
 
+        $category = new Category();
+        $category->setCategoryNameEs('NOVEDADES');
+        
         $query = $em->createQuery("SELECT p FROM ShopBundle:Product p WHERE p.isNew=1 and p.isShow=1");
         $products = $query->getResult();
 
         return $this->render('ShopBundle:Default:productlist.html.twig', array(
+            'category' => $category,
             'products' => $products,
             'categories' => $categories,
             'userNow' => $userNow,

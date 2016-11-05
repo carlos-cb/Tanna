@@ -11,10 +11,17 @@
 
     <div class="container">
         <div class="mainimg">
-            <img src="{{ asset('bundles/shop/img/abrigo.jpg') }}">
-            <div class="words">
-                <h1>ABRIGOS</h1>
-            </div>
+             {% if category.categoryNameEs == 'ABRIGOS' %}
+                 <img src="{{ asset('bundles/shop/img/abrigo.jpg') }}">
+                 <div class="words">
+                     <h1>ABRIGOS</h1>
+                 </div>
+             {% else %}
+                <img src="{{ asset('bundles/shop/img/novedades.jpg') }}">
+                <div class="words">
+                    <h1 style="color: #000;">{{ category.categoryNameEs }}</h1>
+                </div>
+            {% endif %}
         </div>
         <br><br><br><br>
         <div class="row imglist">

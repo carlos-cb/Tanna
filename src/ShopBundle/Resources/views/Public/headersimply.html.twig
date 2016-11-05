@@ -1,0 +1,42 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/shop/css/header.css') }}">
+{% endblock %}
+
+<div class="container">
+    <div class="nav">
+        <div class="toplogo">
+            <a>Bienvenido a tannamoda.com </a>
+            {% if userNow is defined and userNow %}
+                <a href="" class="">Hola, {{ userNow.username }}</a>
+            {% else %}
+                <a href="{{ path('fos_user_security_login') }}" class="">Iniciar sesión</a>
+            {% endif %}
+            <a href="{% if userNow is defined and userNow %}{{ path('shop_pedido') }}{% else %}{{ path('fos_user_security_login') }}{% endif %}" class="">Mis pedidos  <i class="fa fa-file-text-o" aria-hidden="true"></i></a>
+        </div>
+        <div class="centerlogo">
+            <a href="/"><img id="centerlogo" src="{{ asset('bundles/shop/img/logo.png') }}"></a>
+        </div>
+        <div class="rightlogo">
+            <a href="{{ path('shop_cart') }}" class=""><i class="fa fa-shopping-bag"></i> &nbsp;&nbsp;MI CESTA</a>
+        </div>
+        <div class="menu">
+            <ul class="category">
+                <li class="nuevo"><a href="{{ path('shop_productList_new') }}">NOVEDADES</a></li>
+                <li class=""><a href="{{ path('shop_productList', { 'category': 2 }) }}">ABRIGOS</a></li>
+            </ul>
+            <div id="header_search_wrapper_desktop">
+                <div id="header-search" class="skip-content">
+                    <form id="search_mini_form" action="" method="get">
+                        <div class="form-search">
+                            <label for="search"><span class="icon icon-search">Buscar</span></label>
+                            <input id="search" type="text" name="q" placeholder=" " value="" class="input-text ff-basic-autocomplete" autocomplete="off">
+                            <button type="submit" title="Search" class=""><span><i class="fa fa-search" aria-hidden="true"></i></span></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="featurette-divider">
+    <br>
+</div>

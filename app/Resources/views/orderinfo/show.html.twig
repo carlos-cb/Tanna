@@ -65,6 +65,7 @@
             <th>Código</th>
             <th>Nombre</th>
             <th>Color</th>
+            <th>Talla</th>
             <th>Cantidad</th>
             <th>Precio</th>
             <th>Importe</th>
@@ -77,6 +78,7 @@
                 <td>{{ orderItem.product.code }}</td>
                 <td>{{ orderItem.product.productNameEs }}</td>
                 <td>{{ orderItem.colorName }}</td>
+                <td>{{ orderItem.sizeName }}</td>
                 <td>{{ orderItem.quantity }}</td>
                 <td>{{ orderItem.product.price|number_format(2, '.', ',') }} €</td>
                 {% set foo = orderItem.quantity * orderItem.product.price %}
