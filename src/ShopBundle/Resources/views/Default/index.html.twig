@@ -11,16 +11,37 @@
 
     <div class="container">
 
-        <div class="mainimg">
-            <img src="{{ asset('bundles/shop/img/main.jpg') }}">
-            <div class="words">
-                <h1>tannamoda.com</h1>
-                <h1>última semana</h1>
-                <div class="button-wrapper">
-                    <a href="{{ path('shop_productList_new') }}" class=" button banner-button btn-light">COMPRAR AHORA</a>
+        <section class="home-block grid2">
+            <h4 class="hs1" style="display: none;">NOVEDADES</h4>
+            <h1 class="ha1">Última Semana</h1>
+            <br>
+            <div class="best-picks-wrapper row">
+                <div class="col-xs-6 col-md-3">
+                    <a href="">
+                        <img src="{{ asset('bundles/shop/img/top1.jpg') }}">
+                        <h4 class="hs1">VALENTINO</h4>
+                    </a>
+                </div>
+                <div class="col-xs-6 col-md-3">
+                    <a href="">
+                        <img src="{{ asset('bundles/shop/img/top2.jpg') }}">
+                        <h4 class="hs1">STELLA MCCARTNEY</h4>
+                    </a>
+                </div>
+                <div class="col-xs-6 col-md-3">
+                    <a href="">
+                        <img src="{{ asset('bundles/shop/img/top3.jpg') }}">
+                        <h4 class="hs1">SAINT LAURENT</h4>
+                    </a>
+                </div>
+                <div class="col-xs-6 col-md-3">
+                    <a href="">
+                        <img src="{{ asset('bundles/shop/img/top4.jpg') }}">
+                        <h4 class="hs1">GUCCI</h4>
+                    </a>
                 </div>
             </div>
-        </div>
+        </section>
         <br><br><br><br>
         <div class="row showcase">
             <div class="col-md-6">
@@ -28,7 +49,7 @@
             </div>
             <div class="col-md-6">
                 <a href="{{ path('shop_productList_new') }}"><img src="{{ asset('bundles/shop/img/show2.jpg') }}"></a>
-                <button id="anniu" class="button button-inverse">Comprar Ahora <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+                <br>
                 <hr class="featurette-divider">
                 <h1 class="ha1">Mejor Vendido En Tienda</h1>
                 <div class="col-md-6">
