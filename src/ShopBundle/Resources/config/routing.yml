@@ -46,6 +46,10 @@ shop_info:
     resource: "@ShopBundle/Resources/config/routing/info.yml"
     prefix:   /info
 
+shop_autonomo:
+    resource: "@ShopBundle/Resources/config/routing/autonomo.yml"
+    prefix:   /autonomo
+
 shop_homepage:
     path:     /
     defaults: { _controller: ShopBundle:Default:index }

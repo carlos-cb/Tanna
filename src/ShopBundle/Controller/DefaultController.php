@@ -223,6 +223,30 @@ class DefaultController extends Controller
         ));
     }
 
+    public function autonomoAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository('ShopBundle:Category')->findAll();
+        $userNow = $this->getUser();
+
+        return $this->render('ShopBundle:Info:autonomo.html.twig', array(
+            'categories' => $categories,
+            'userNow' => $userNow,
+        ));
+    }
+
+    public function changeAutonomoAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $userNow = $this->getUser();
+        $user = $em->getRepository('ShopBundle:User')->find($userNow);
+        $user->setIsAutonomo(!$user->getIsAutonomo());
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirectToRoute('autonomo_index');
+    }
+
     public function pedidoAction()
     {
         $user = $this->getUser();

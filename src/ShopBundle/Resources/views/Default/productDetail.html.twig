@@ -40,7 +40,7 @@
                     <div class="product-price product-detail-price">
                         <div class="price-column product-detail-price-column">
                             <!-- // BUGFIX GR-3357  PDP - Fix mixed currency signs -->
-                            <span id="markedDown_full_Price" class="price">€ {{ product.price }}</span>
+                            <span id="markedDown_full_Price" class="price">€ {% if userNow.isAutonomo %}{{ product.priceA }}{% else %}{{ product.price }}{% endif %}</span>
                         </div>
                     </div>
                     <div class="product-info-wrapper">

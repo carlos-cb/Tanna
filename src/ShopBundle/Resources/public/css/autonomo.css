@@ -1,0 +1,50 @@
+
+.thething {
+    margin: 20px auto;
+    width: 70%;
+    height: 160px;
+}
+
+.option {
+    color: #A8B1BB;
+    display: block;
+    height: 80px;
+    line-height: 80px;
+    padding: 8px 20px;
+    font-size: 40px;
+    float: left;
+    cursor: pointer;
+    width: 160px;
+}
+.option#option1 {
+    text-align: right;
+    margin-right: 140px;
+}
+.option#option2 {
+    text-align: left;
+}
+.option.active {
+    color: #000;
+}
+
+#switch {
+    background: #ffc0cb;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    float: left;
+    width: 160px;
+    padding: 8px;
+    -moz-border-radius: 56px;
+    -webkit-border-radius: 56px;
+    border-radius: 56px;
+}
+#switch .handle {
+    display: block;
+    background: #ff748c;
+    height: 80px;
+    width: 80px;
+    -moz-border-radius: 40px;
+    -webkit-border-radius: 40px;
+    border-radius: 40px;
+}

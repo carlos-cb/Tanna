@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/shop/css/autonomo.css') }}" />
+{% endblock %}
+
+{% block body %}
+
+    {% include 'ShopBundle:Public:header.html.twig' %}
+
+    <div class="container">
+    <div class="row" style="text-align: center; margin-top: 150px;margin-bottom: 50px;">
+        <div class="thething">
+            <span id="option1" class="option{% if userNow.isAutonomo==0 %} active{% endif %}">¿SOCIEDAD?</span>
+            <div id="switch">
+                <a href="{{ path('autonomo_change') }}"><span class="handle"></span></a>
+            </div>
+            <span id="option2" class="option{% if userNow.isAutonomo %} active{% endif %}">¿AUTÓNOMO?</span>
+        </div>
+        <h2>Si usted es autónomo, hay que pagar un recargo de equivalencia.</h2>
+    </div>
+    </div>
+
+    {% include 'ShopBundle:Public:footer.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="http://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="{{ asset('bundles/shop/js/autonomo.js') }}"></script>
+{% endblock %}

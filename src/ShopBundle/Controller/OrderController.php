@@ -122,9 +122,15 @@ class OrderController extends Controller
         $cartItems = $user->getCart()->getCartItems();
         $priceall = 0;
 
+
         foreach($cartItems as $cartItem)
         {
-            $priceall += ($cartItem->getQuantity() * $cartItem->getProduct()->getPrice());
+            if($user->getIsAutonomo()) {
+                $priceUnit = $cartItem->getProduct()->getPriceA();
+            }else{
+                $priceUnit = $cartItem->getProduct()->getPrice();
+            }
+            $priceall += ($cartItem->getQuantity() * $priceUnit);
         }
         return $priceall;
     }

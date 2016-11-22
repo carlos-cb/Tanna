@@ -42,7 +42,7 @@
                                 <td class="quantity">
                                     <span class="_quantity" id="_quantity">{{ cartItem.quantity }}</span>
                                     <span id="cartItemId" style="display: none">{{ cartItem.id }}</span>
-                                    <span id="priceunit" style="display: none">{{ cartItem.product.price }}</span>
+                                    <span id="priceunit" style="display: none">{% if userNow.isAutonomo %}{{ cartItem.product.priceA }}{% else %}{{ cartItem.product.price }}{% endif %}</span>
                                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="minnum" data-path="{{ path('cart_update') }}"><i class="fa fa-minus" aria-hidden="true"></i></a>
                                     &nbsp;&nbsp;&nbsp;&nbsp;<a class="addnum" data-path="{{ path('cart_update') }}"><i class="fa fa-plus" aria-hidden="true"></i></a>
                                 </span>

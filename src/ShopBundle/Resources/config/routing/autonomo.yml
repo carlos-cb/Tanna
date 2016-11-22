@@ -1,0 +1,7 @@
+autonomo_index:
+    path:     /
+    defaults: { _controller: "ShopBundle:Default:autonomo" }
+
+autonomo_change:
+    path:     /change
+    defaults: { _controller: "ShopBundle:Default:changeAutonomo" }
