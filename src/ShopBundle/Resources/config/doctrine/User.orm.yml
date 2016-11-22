@@ -8,6 +8,9 @@ ShopBundle\Entity\User:
             id: true
             generator:
                 strategy: AUTO
+    fields:
+        isAutonomo:
+            type: boolean
     oneToOne:
         cart:
             targetEntity: Cart

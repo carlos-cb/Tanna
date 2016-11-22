@@ -17,6 +17,8 @@ ShopBundle\Entity\Product:
             length: 255
         price:
             type: float
+        priceA:
+            type: float
         code:
             type: string
             length: 255

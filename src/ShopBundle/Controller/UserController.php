@@ -40,6 +40,7 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setIsAutonomo(false);
             $user->setEnabled(true);
             
             $em = $this->getDoctrine()->getManager();

@@ -14,7 +14,8 @@ class User extends BaseUser
      * @var int
      */
     protected $id;
-
+    
+    protected $isAutonomo;
 
     /**
      * Get id
@@ -112,5 +113,28 @@ class User extends BaseUser
         }
 
         return $sum;
+    }
+
+    /**
+     * Set isAutonomo
+     *
+     * @param boolean $isAutonomo
+     * @return User
+     */
+    public function setIsAutonomo($isAutonomo)
+    {
+        $this->isAutonomo = $isAutonomo;
+
+        return $this;
+    }
+
+    /**
+     * Get isAutonomo
+     *
+     * @return boolean 
+     */
+    public function getIsAutonomo()
+    {
+        return $this->isAutonomo;
     }
 }

@@ -405,4 +405,32 @@ class Product
     public function __toString() {
         return strval($this->id);
     }
+    /**
+     * @var float
+     */
+    private $priceA;
+
+
+    /**
+     * Set priceA
+     *
+     * @param float $priceA
+     * @return Product
+     */
+    public function setPriceA($priceA)
+    {
+        $this->priceA = $priceA;
+
+        return $this;
+    }
+
+    /**
+     * Get priceA
+     *
+     * @return float 
+     */
+    public function getPriceA()
+    {
+        return $this->priceA;
+    }
 }
