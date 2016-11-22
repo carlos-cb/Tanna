@@ -30,8 +30,8 @@
             <th>ID</th>
             <th>Código</th>
             <th>Nombre de Producto ES</th>
-            <th>Nombre de Producto EN</th>
             <th>Precio</th>
+            <th>Precio-A</th>
             <th>Foto</th>
             <th>Categoría</th>
             <th>Mostrado</th>
@@ -44,8 +44,8 @@
                 <td>{{ product.id }}</td>
                 <td>{{ product.code }}</td>
                 <td>{{ product.productNameEs }}</td>
-                <td>{{ product.productNameEn }}</td>
                 <td>{{ product.price }}</td>
+                <td>{{ product.priceA }}</td>
                 <td><a href="{{ asset('uploads/fotos/' ~ product.foto) }}"><img src="{{ asset('uploads/fotos/' ~ product.foto) }}" height="120px" width="100px"></a></td>
                 <td>{{ product.category.categoryNameEs }}</td>
                 <td>{% if product.isShow %}Sí{% else %}No{% endif %}<br>

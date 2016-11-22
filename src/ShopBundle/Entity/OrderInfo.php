@@ -633,4 +633,32 @@ class OrderInfo
     public function __toString() {
         return strval($this->id);
     }
+    /**
+     * @var boolean
+     */
+    private $isAutonomo;
+
+
+    /**
+     * Set isAutonomo
+     *
+     * @param boolean $isAutonomo
+     * @return OrderInfo
+     */
+    public function setIsAutonomo($isAutonomo)
+    {
+        $this->isAutonomo = $isAutonomo;
+
+        return $this;
+    }
+
+    /**
+     * Get isAutonomo
+     *
+     * @return boolean 
+     */
+    public function getIsAutonomo()
+    {
+        return $this->isAutonomo;
+    }
 }

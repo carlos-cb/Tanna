@@ -28,6 +28,7 @@ class ProductType extends AbstractType
                 'required' => false,
             ))
             ->add('price', null, array('label' => 'Precio'))
+            ->add('priceA', null, array('label' => 'Precio-A'))
             ->add('code', null, array('label' => 'Código'))
             ->add('description', null, array('label' => 'Descripción'))
         ;

@@ -34,7 +34,7 @@
             <th>Último acceso</th>
             <th>Pedidos</th>
             <th>Consumo Total</th>
-            <th>Regla de usuario</th>
+            <th>Autónomo</th>
         </tr>
         </thead>
         <tbody>
@@ -55,13 +55,7 @@
                 <td>{% if user.lastLogin %}{{ user.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td><a class="button button-tiny button-primary" href="{{ path('orderinfo_indexUser', { 'user': user.id }) }}">Ver</a></td>
                 <td>{{ user.OrderInfoSum|number_format(2, '.', ',') }} €</td>
-                <td>
-                    <ul class="list">
-                        {%for role in user.roles %}
-                            <li>{% if role == 'ROLE_SUPER_ADMIN' %}Super Administrator{% else %}Usuario Normal{% endif %}</li>
-                        {%endfor%}
-                    </ul>
-                </td>
+                <td>{% if user.isAutonomo %}Si{% else %}No{% endif %}</td>
             </tr>
         {% endfor %}
         </tbody>

@@ -20,7 +20,7 @@
     <br>
     <ul>
         <li>
-            <a href="{{ path('product_index') }}" class="button">Volover</a>
+            <a href="{{ path('product_index') }}" class="button">Volver</a>
         </li>
     </ul>
     <br>
@@ -30,8 +30,8 @@
             <th>ID</th>
             <th>Código</th>
             <th>Nombre de Producto ES</th>
-            <th>Nombre de Producto EN</th>
             <th>Precio</th>
+            <th>Precio-A</th>
             <th>Código</th>
             <th>Foto</th>
             <th>Categoría</th>
@@ -44,8 +44,8 @@
             <td>{{ product.id }}</td>
             <td>{{ product.code }}</td>
             <td>{{ product.productNameEs }}</td>
-            <td>{{ product.productNameEn }}</td>
             <td>{{ product.price }}</td>
+            <td>{{ product.priceA }}</td>
             <td>{{ product.code }}</td>
             <td><a href="{{ asset('uploads/fotos/' ~ product.foto) }}"><img src="{{ asset('uploads/fotos/' ~ product.foto) }}" height="120px" width="100px"></a></td>
             <td>{{ product.category.categoryNameEs }}</td>

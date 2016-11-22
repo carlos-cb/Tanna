@@ -48,7 +48,7 @@
             <th>Dirección</th>
         </tr>
         <tr>
-            <td height="100">{{ orderInfo.receiverName }}</td>
+            <td height="100">{{ orderInfo.receiverName }}{% if orderInfo.user.isAutonomo %}(A){% endif %}</td>
             <td>{{ orderInfo.receiverPhone }}</td>
             <td>{{ orderInfo.receiverCity }}</td>
             <td>{{ orderInfo.receiverProvince }}</td>
@@ -80,8 +80,13 @@
                 <td>{{ orderItem.colorName }}</td>
                 <td>{{ orderItem.sizeName }}</td>
                 <td>{{ orderItem.quantity }}</td>
-                <td>{{ orderItem.product.price|number_format(2, '.', ',') }} €</td>
-                {% set foo = orderItem.quantity * orderItem.product.price %}
+                {% if orderInfo.user.isAutonomo %}
+                    {% set priceNow = orderItem.product.priceA %}
+                {% else %}
+                    {% set priceNow = orderItem.product.price %}
+                {% endif %}
+                <td>{{ priceNow|number_format(2, '.', ',') }} €</td>
+                {% set foo = orderItem.quantity * priceNow %}
                 <td>{{ foo|number_format(2, '.', ',') }} €</td>
             </tr>
         {% endfor %}
