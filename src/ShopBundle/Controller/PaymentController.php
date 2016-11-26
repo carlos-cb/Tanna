@@ -56,8 +56,8 @@ class PaymentController extends Controller
         
         if ($paymentStatus === true)
         {
-            $message = \Swift_Message::newInstance()
-                ->setSubject('Nuevo Pedido En tannamoda.com')
+            $messageClient = \Swift_Message::newInstance()
+                ->setSubject('Nuevo Pedido En Tannamoda.com')
                 ->setFrom(array('info@nubbemoda.com' => 'Tanna Moda'))
                 ->setTo($user->getEmail())
                 ->setContentType('text/html')
@@ -70,7 +70,23 @@ class PaymentController extends Controller
                     )),
                     'text/html'
                 );
-            $this->get('mailer')->send($message);
+            $this->get('mailer')->send($messageClient);
+
+            $messageBackend = \Swift_Message::newInstance()
+                ->setSubject('Nuevo Pedido En Tannamoda.com')
+                ->setFrom(array('info@nubbemoda.com' => 'Tanna Moda'))
+                ->setTo('tannamoda@hotmail.com')
+                ->setContentType('text/html')
+                ->setBody(
+                    $this->renderView(
+                        'ShopBundle:Payment:successpaymentEmailBackend.html.twig', array(
+                        'status' => $status->getValue(),
+                        'orderInfo' => $orderInfo,
+                        'userNow' => $user,
+                    )),
+                    'text/html'
+                );
+            $this->get('mailer')->send($messageBackend);
 
             //修改订单状态
 

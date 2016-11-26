@@ -20,13 +20,9 @@
             <div class="col-md-7 col-lg-7">
                 <div class="pageCenter">
                     <div class="thumbnails">
-                        <a href="{{ asset('uploads/fotos/' ~ color.colorFoto) }}" title="Detalle de Foto"  target="_blank">
-                            <img onmouseover="preview.src=img0.src" name="img0" src="{{ asset('uploads/fotos/' ~ color.colorFoto) }}" alt="" />
-                        </a>
+                        <img onmouseover="preview.src=img0.src" name="img0" src="{{ asset('uploads/fotos/' ~ color.colorFoto) }}" alt="" />
                         {% for fotodetalle in color.fotodetalles %}
-                            <a href="{{ asset('uploads/fotos/' ~ fotodetalle.fotodetalle) }}" title="Detalle de Foto"  target="_blank">
-                                <img onmouseover="preview.src=img{{ loop.index }}.src" name="img{{ loop.index }}" src="{{ asset('uploads/fotos/' ~ fotodetalle.fotodetalle) }}" alt="" />
-                            </a>
+                            <img onmouseover="preview.src=img{{ loop.index }}.src" name="img{{ loop.index }}" src="{{ asset('uploads/fotos/' ~ fotodetalle.fotodetalle) }}" alt="" />
                         {% endfor %}
                     </div>
                     <div class="preview" align="center">
@@ -40,7 +36,7 @@
                     <div class="product-price product-detail-price">
                         <div class="price-column product-detail-price-column">
                             <!-- // BUGFIX GR-3357  PDP - Fix mixed currency signs -->
-                            <span id="markedDown_full_Price" class="price">€ {% if userNow.isAutonomo %}{{ product.priceA|number_format(2, '.', ',') }}{% else %}{{ product.price|number_format(2, '.', ',') }}{% endif %}</span>
+                            <span id="markedDown_full_Price" class="price">€ {% if userNow.isAutonomo is defined and userNow.isAutonomo %}{{ product.priceA|number_format(2, '.', ',') }}{% else %}{{ product.price|number_format(2, '.', ',') }}{% endif %}</span>
                         </div>
                     </div>
                     <div class="product-info-wrapper">

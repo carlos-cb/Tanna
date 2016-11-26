@@ -37,7 +37,7 @@
                             <br>
                         {% endif %}
                         <a class="" href="{{ path('shop_productDetail', { 'product': product.id, 'colorId': 1 }) }}">{{ product.productNameEs }}</a>
-                        <div class="price _product-price"><span>{% if userNow.isAutonomo %}{{ product.priceA|number_format(2, '.', ',') }}{% else %}{{ product.price|number_format(2, '.', ',') }}{% endif %} EUR</span></div>
+                        <div class="price _product-price"><span>{% if userNow.isAutonomo is defined and userNow.isAutonomo %}{{ product.priceA|number_format(2, '.', ',') }}{% else %}{{ product.price|number_format(2, '.', ',') }}{% endif %} EUR</span></div>
                     </div>
                 </div>
             {% endfor %}
