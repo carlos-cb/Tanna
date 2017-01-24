@@ -11,8 +11,14 @@ class OrderController extends Controller
 {
     public function cartToOrderinfoAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+        $global = $em->getRepository('ShopBundle:Globals')->findOneById(1);
         $priceAll = $this->countAll();
         $priceIni = $priceAll;
+        if($priceAll >= $global->getMan())
+        {
+            $priceAll = $priceAll - $global->getJian();
+        }
         $yunfei = 3.95;
         $shipmode = "Estándar";
         if($request->get('radio-group') == '2')
@@ -33,6 +39,8 @@ class OrderController extends Controller
             $yunfei = 0;
             $priceAll = $priceAll - 3.95;
         }
+
+
         //根据用户填写的表格新建订单
         if($request->getMethod() == 'POST' && ($priceIni!=0) ){
             //订单信息录入
