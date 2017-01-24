@@ -18,10 +18,23 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $categories = $em->getRepository('ShopBundle:Category')->findAll();
         $userNow = $this->getUser();
+        $global = $em->getRepository('ShopBundle:Globals')->findOneById(2);
+        $timeNow = new \DateTime('now');
+        if($global->getMan() == $timeNow->format('d'))
+        {
+            $global->setJian($global->getJian()+1);
+        }
+        else
+        {
+            $global->setMan($timeNow->format('d'))->setJian(1);
+        }
+        $em->persist($global);
+        $em->flush();
         
         return $this->render('ShopBundle:Default:index.html.twig', array(
             'categories' => $categories,
             'userNow' => $userNow,
+            'day' => $timeNow,
         ));
     }
     
@@ -159,7 +172,9 @@ class DefaultController extends Controller
         $numUser = $em->getRepository('ShopBundle:User')->createQueryBuilder('a')->select('COUNT(a.id)')->getQuery()->getSingleScalarResult();
         $numOrder = $em->getRepository('ShopBundle:OrderInfo')->createQueryBuilder('b')->select('COUNT(b.id)')->getQuery()->getSingleScalarResult();
         $numProduct = $em->getRepository('ShopBundle:Product')->createQueryBuilder('c')->select('COUNT(c.id)')->getQuery()->getSingleScalarResult();
-
+        $global = $em->getRepository('ShopBundle:Globals')->findOneById(2);
+        
+        $viewsToday = $global->getJian();
         $queryU = $em->createQuery("SELECT p FROM ShopBundle:User p WHERE 1=1 order by p.id DESC")->setMaxResults(10);
         $users = $queryU->getResult();
 
@@ -179,6 +194,7 @@ class DefaultController extends Controller
             'users' => $users,
             'orders' => $orders,
             'day6Orders' => $day6Orders,
+            'viewsToday' => $viewsToday,
         ));
     }
 
