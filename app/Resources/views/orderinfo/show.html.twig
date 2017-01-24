@@ -80,14 +80,8 @@
                 <td>{{ orderItem.colorName }}</td>
                 <td>{{ orderItem.sizeName }}</td>
                 <td>{{ orderItem.quantity }}</td>
-                {% if orderInfo.user.isAutonomo %}
-                    {% set priceNow = orderItem.product.priceA %}
-                {% else %}
-                    {% set priceNow = orderItem.product.price %}
-                {% endif %}
-                <td>{{ priceNow|number_format(2, '.', ',') }} €</td>
-                {% set foo = orderItem.quantity * priceNow %}
-                <td>{{ foo|number_format(2, '.', ',') }} €</td>
+                <td>{{ orderItem.price|number_format(2, '.', ',') }} €</td>
+                <td>{{ orderItem.total|number_format(2, '.', ',') }} €</td>
             </tr>
         {% endfor %}
         </tbody>

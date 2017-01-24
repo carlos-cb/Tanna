@@ -1,0 +1,16 @@
+ShopBundle\Entity\Globals:
+    type: entity
+    table: null
+    repositoryClass: ShopBundle\Repository\GlobalsRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        man:
+            type: float
+        jian:
+            type: float
+    lifecycleCallbacks: {  }

@@ -33,6 +33,20 @@ ShopBundle\Entity\Product:
             type: boolean
         isShow:
             type: boolean
+        isSale:
+            type: boolean
+        discountPrice:
+            type: float
+            nullable: true
+        discountPriceA:
+            type: float
+            nullable: true
+        isOferta:
+            type: boolean
+        maiUnit:
+            type: integer
+        suanUnit:
+            type: integer
     oneToMany:
         colors:
             targetEntity: Color

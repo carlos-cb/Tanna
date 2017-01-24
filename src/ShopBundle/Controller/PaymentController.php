@@ -75,7 +75,7 @@ class PaymentController extends Controller
             $messageBackend = \Swift_Message::newInstance()
                 ->setSubject('Nuevo Pedido En Tannamoda.com')
                 ->setFrom(array('info@nubbemoda.com' => 'Tanna Moda'))
-                ->setTo('tannamoda@hotmail.com')
+                ->setTo('1878118@qq.com')
                 ->setContentType('text/html')
                 ->setBody(
                     $this->renderView(

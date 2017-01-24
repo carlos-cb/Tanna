@@ -42,12 +42,20 @@
                                 <td class="quantity">
                                     <span class="_quantity" id="_quantity">{{ cartItem.quantity }}</span>
                                     <span id="cartItemId" style="display: none">{{ cartItem.id }}</span>
-                                    <span id="priceunit" style="display: none">{% if userNow.isAutonomo %}{{ cartItem.product.priceA }}{% else %}{{ cartItem.product.price }}{% endif %}</span>
+                                    <span id="priceunit" style="display: none">{{ cartItem.price }}</span>
+                                    <span id="oferta" style="display: none">{{ cartItem.product.isOferta }}</span>
+                                    <span id="maiUnit" style="display: none">{{ cartItem.product.maiUnit }}</span>
+                                    <span id="suanUnit" style="display: none">{{ cartItem.product.suanUnit }}</span>
                                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="minnum" data-path="{{ path('cart_update') }}"><i class="fa fa-minus" aria-hidden="true"></i></a>
                                     &nbsp;&nbsp;&nbsp;&nbsp;<a class="addnum" data-path="{{ path('cart_update') }}"><i class="fa fa-plus" aria-hidden="true"></i></a>
                                 </span>
                                 </td>
-                                <td class="price"><span id="heji"></span> EUR</td>
+                                <td class="price"><span id="heji"></span> EUR<br><br>
+                                    <span style="color: red;">
+                                        {% if cartItem.product.isSale %}Precio Con Descuento{% endif %}
+                                        {% if cartItem.product.isOferta %}{{ cartItem.product.maiUnit }} X {{ cartItem.product.suanUnit }}{% endif %}
+                                    </span>
+                                </td>
                                 <td class="delete">
                                     <a style="float: right;padding-right: 10px; font-size: 16px;" href="{{ path('cart_cartitem_delete', { 'id': cartItem.id }) }}">
                                         <i class="fa fa-trash-o" aria-hidden="true"></i>

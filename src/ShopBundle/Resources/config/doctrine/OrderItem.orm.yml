@@ -24,6 +24,10 @@ ShopBundle\Entity\OrderItem:
         foto:
             type: string
             length: 255
+        price:
+            type: float
+        total:
+            type: float
     manyToOne:
         orderInfo:
             targetEntity: OrderInfo

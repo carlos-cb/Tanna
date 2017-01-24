@@ -1,0 +1,35 @@
+sale_index:
+    path:     /
+    defaults: { _controller: "ShopBundle:Sale:index" }
+
+saleA_index:
+    path:     /A
+    defaults: { _controller: "ShopBundle:Sale:a" }
+
+a_add_sale:
+    path:     /A/addsale
+    defaults: { _controller: "ShopBundle:Sale:aAddSale" }
+
+a_delete_sale:
+    path:     /A/deletesale/{id}
+    defaults: { _controller: "ShopBundle:Sale:aDeleteSale" }
+
+saleB_index:
+    path:     /B
+    defaults: { _controller: "ShopBundle:Sale:b" }
+
+b_add_sale:
+    path:     /B/addsale
+    defaults: { _controller: "ShopBundle:Sale:bAddSale" }
+
+b_delete_sale:
+    path:     /B/deletesale/{id}
+    defaults: { _controller: "ShopBundle:Sale:bDeleteSale" }
+
+saleD_index:
+    path:     /D
+    defaults: { _controller: "ShopBundle:Sale:d" }
+
+d_edit_sale:
+    path:     /D/editsale
+    defaults: { _controller: "ShopBundle:Sale:dEditSale" }

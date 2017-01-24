@@ -42,7 +42,14 @@ $(function(){
     function setHeji(){
         var ff = $('#shangpin').find('tr#order-item');
         for(var j=0; j<ff.length; j++){
-            var s = parseInt($(ff[j]).find("#_quantity").text())*parseFloat($(ff[j]).find("#priceunit").text());
+            var oferta = parseInt($(ff[j]).find("#oferta").text());
+            var maiUnit = parseInt($(ff[j]).find("#maiUnit").text());
+            var suanUnit = parseInt($(ff[j]).find("#suanUnit").text());
+            var _quantity = parseInt($(ff[j]).find("#_quantity").text());
+            if(oferta){
+                _quantity = suanUnit * Math.floor(_quantity/maiUnit) + _quantity%maiUnit;
+            }
+            var s = _quantity * parseFloat($(ff[j]).find("#priceunit").text());
             $(ff[j]).find("#heji").html(s.toFixed(2));
         }
     }

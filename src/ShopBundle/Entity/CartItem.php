@@ -224,4 +224,32 @@ class CartItem
     public function __toString() {
         return strval($this->id);
     }
+    /**
+     * @var float
+     */
+    private $price;
+
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     * @return CartItem
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float 
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
 }

@@ -1,0 +1,67 @@
+{% extends 'ShopBundle:BackEnd:index.html.twig' %}
+
+{% block menuslide %}
+    <ul class="nav nav-sidebar">
+        <li><a href="{{ path('shop_homepage_admin') }}"><i class="fa fa-tachometer" aria-hidden="true"></i> &nbsp;Visión Genenal  <span class="sr-only">(current)</span></a></li>
+        <li><a href="#"><i class="fa fa-info" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;&nbsp;Informe</a></li>
+        <li><a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp; Análisis</a></li>
+    </ul>
+    <ul class="nav nav-sidebar">
+        <li><a href="{{ path('user_index') }}"><i class="fa fa-users" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Usuarios</a></li>
+        <li><a href="{{ path('category_index') }}"><i class="fa fa-columns" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Categorías</a></li>
+        <li><a href="{{ path('product_index') }}"><i class="fa fa-female" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Gestión de Productos</a></li>
+        <li><a href="{{ path('select_new') }}"><i class="fa fa-heart" aria-hidden="true"></i> &nbsp;&nbsp;Selección Nuevos</a></li>
+        <li class="active"><a href="{{ path('sale_index') }}"><i class="fa fa-bell" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Ofertas</a></li>
+        <li><a href="{{ path('orderinfo_index') }}"><i class="fa fa-credit-card" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Pedidos</a></li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <h1 class="sub-header">Descuento Hasta X menos Y</h1>
+    <a href="{{ path('sale_index') }}" class="button button-rounded button-inverse">Volver</a>
+    <br><br><br>
+    <form class="form-inline" action="{{ path('d_edit_sale') }}" method="post">
+        <div class="form-group">
+            <label for="codigo">Hasta</label>
+            <input type="number" step="0.01" class="form-control" id="codigo" name="codigo" placeholder="cuanto" required="required">
+        </div>
+        <div class="form-group">
+            <label for="price">menos</label>
+            <input type="number" step="0.01" class="form-control" id="price" name="price" placeholder="cuanto" required="required">
+        </div>
+        <button type="submit" class="btn btn-inverse">Editar</button>
+    </form>
+    <br>
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+
+    {% endfor %}
+    <h4>Si no hay este descuento, edita el "menos" al 0.</h4>
+    <br>
+    <div class="col-xs-4">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Hasta</th>
+                <th>Menos</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ global.man }}</td>
+                    <td>{{ global.jian }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

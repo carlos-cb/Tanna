@@ -1,0 +1,50 @@
+{% extends 'ShopBundle:BackEnd:index.html.twig' %}
+
+{% block menuslide %}
+    <ul class="nav nav-sidebar">
+        <li><a href="{{ path('shop_homepage_admin') }}"><i class="fa fa-tachometer" aria-hidden="true"></i> &nbsp;Visión Genenal  <span class="sr-only">(current)</span></a></li>
+        <li><a href="#"><i class="fa fa-info" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;&nbsp;Informe</a></li>
+        <li><a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp; Análisis</a></li>
+    </ul>
+    <ul class="nav nav-sidebar">
+        <li><a href="{{ path('user_index') }}"><i class="fa fa-users" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Usuarios</a></li>
+        <li><a href="{{ path('category_index') }}"><i class="fa fa-columns" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Categorías</a></li>
+        <li><a href="{{ path('product_index') }}"><i class="fa fa-female" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Gestión de Productos</a></li>
+        <li><a href="{{ path('select_new') }}"><i class="fa fa-heart" aria-hidden="true"></i> &nbsp;&nbsp;Selección Nuevos</a></li>
+        <li class="active"><a href="{{ path('sale_index') }}"><i class="fa fa-bell" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Ofertas</a></li>
+        <li><a href="{{ path('orderinfo_index') }}"><i class="fa fa-credit-card" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Pedidos</a></li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <h1>Gestión de Ofertas</h1>
+    <h3 class="sub-header">Elige tipo de oferta</h3>
+    <br>
+    <div class="row category">
+        <div class="col-xs-6 col-md-3">
+            <div class="boxCategory">
+                <a href="{{ path('saleA_index') }}">
+                    <img src="{{ asset('bundles/shop/img/dazhe.png') }}">
+                </a>
+            </div>
+            <h4>Percentage</h4>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <div class="boxCategory">
+                <a href="{{ path('saleB_index') }}">
+                    <img src="{{ asset('bundles/shop/img/2x1.jpg') }}">
+                </a>
+            </div>
+            <h4>X por Y</h4>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <div class="boxCategory">
+                <a href="{{ path('saleD_index') }}">
+                    <img src="{{ asset('bundles/shop/img/manlijian.jpg') }}">
+                </a>
+            </div>
+            <h4>Hasta X menos Y</h4>
+        </div>
+    </div>
+
+{% endblock %}

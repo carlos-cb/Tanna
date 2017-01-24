@@ -124,13 +124,7 @@
                             <span id="cartItemId" style="display: none">{{ orderItem.id }}</span>
                             <span id="priceunit" style="display: none">{% if userNow.isAutonomo %}{{ orderItem.product.priceA }}{% else %}{{ orderItem.product.price }}{% endif %}</span>
                         </td>
-                        <td class="price"><span id="heji">
-                                {% if userNow.isAutonomo %}
-                                    {{ orderItem.product.priceA * orderItem.quantity|number_format(2, '.', ',') }}
-                                {% else %}
-                                    {{ orderItem.product.price * orderItem.quantity|number_format(2, '.', ',') }}
-                                {% endif %}
-                                </span> EUR</td>
+                        <td class="price"><span id="heji">{{ (orderItem.total)|number_format(2, '.', ',') }}</span> EUR</td>
                     </tr>
                 {% endfor %}
                 </tbody>

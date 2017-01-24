@@ -405,3 +405,10 @@ img#colorimg{
     margin-top: 10px;
 
 }
+span.sale{
+    color: #ce0013;
+}
+span.line-through{
+    font-size:18px;
+    text-decoration: line-through;
+}

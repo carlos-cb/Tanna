@@ -204,3 +204,14 @@ ul {
   transition: all .5s;
 }
 
+div.category{
+  text-align: center;
+}
+div.category div.boxCategory{
+  height: 200px;
+}
+div.category div.boxCategory img{
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+}

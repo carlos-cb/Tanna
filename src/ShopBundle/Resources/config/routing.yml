@@ -46,6 +46,10 @@ shop_info:
     resource: "@ShopBundle/Resources/config/routing/info.yml"
     prefix:   /info
 
+shop_sale:
+    resource: "@ShopBundle/Resources/config/routing/sale.yml"
+    prefix:   /sale
+
 shop_autonomo:
     resource: "@ShopBundle/Resources/config/routing/autonomo.yml"
     prefix:   /autonomo

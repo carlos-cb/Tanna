@@ -252,4 +252,60 @@ class OrderItem
     public function __toString() {
         return strval($this->id);
     }
+    /**
+     * @var float
+     */
+    private $price;
+
+    /**
+     * @var float
+     */
+    private $total;
+
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     * @return OrderItem
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float 
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set total
+     *
+     * @param float $total
+     * @return OrderItem
+     */
+    public function setTotal($total)
+    {
+        $this->total = $total;
+
+        return $this;
+    }
+
+    /**
+     * Get total
+     *
+     * @return float 
+     */
+    public function getTotal()
+    {
+        return $this->total;
+    }
 }

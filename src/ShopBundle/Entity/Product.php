@@ -433,4 +433,172 @@ class Product
     {
         return $this->priceA;
     }
+    /**
+     * @var boolean
+     */
+    private $isSale;
+
+    /**
+     * @var float
+     */
+    private $discountPrice;
+
+    /**
+     * @var float
+     */
+    private $discountPriceA;
+
+    /**
+     * @var boolean
+     */
+    private $isOferta;
+
+    /**
+     * @var integer
+     */
+    private $maiUnit;
+
+    /**
+     * @var integer
+     */
+    private $suanUnit;
+
+
+    /**
+     * Set isSale
+     *
+     * @param boolean $isSale
+     * @return Product
+     */
+    public function setIsSale($isSale)
+    {
+        $this->isSale = $isSale;
+
+        return $this;
+    }
+
+    /**
+     * Get isSale
+     *
+     * @return boolean 
+     */
+    public function getIsSale()
+    {
+        return $this->isSale;
+    }
+
+    /**
+     * Set discountPrice
+     *
+     * @param float $discountPrice
+     * @return Product
+     */
+    public function setDiscountPrice($discountPrice)
+    {
+        $this->discountPrice = $discountPrice;
+
+        return $this;
+    }
+
+    /**
+     * Get discountPrice
+     *
+     * @return float 
+     */
+    public function getDiscountPrice()
+    {
+        return $this->discountPrice;
+    }
+
+    /**
+     * Set discountPriceA
+     *
+     * @param float $discountPriceA
+     * @return Product
+     */
+    public function setDiscountPriceA($discountPriceA)
+    {
+        $this->discountPriceA = $discountPriceA;
+
+        return $this;
+    }
+
+    /**
+     * Get discountPriceA
+     *
+     * @return float 
+     */
+    public function getDiscountPriceA()
+    {
+        return $this->discountPriceA;
+    }
+
+    /**
+     * Set isOferta
+     *
+     * @param boolean $isOferta
+     * @return Product
+     */
+    public function setIsOferta($isOferta)
+    {
+        $this->isOferta = $isOferta;
+
+        return $this;
+    }
+
+    /**
+     * Get isOferta
+     *
+     * @return boolean 
+     */
+    public function getIsOferta()
+    {
+        return $this->isOferta;
+    }
+
+    /**
+     * Set maiUnit
+     *
+     * @param integer $maiUnit
+     * @return Product
+     */
+    public function setMaiUnit($maiUnit)
+    {
+        $this->maiUnit = $maiUnit;
+
+        return $this;
+    }
+
+    /**
+     * Get maiUnit
+     *
+     * @return integer 
+     */
+    public function getMaiUnit()
+    {
+        return $this->maiUnit;
+    }
+
+    /**
+     * Set suanUnit
+     *
+     * @param integer $suanUnit
+     * @return Product
+     */
+    public function setSuanUnit($suanUnit)
+    {
+        $this->suanUnit = $suanUnit;
+
+        return $this;
+    }
+
+    /**
+     * Get suanUnit
+     *
+     * @return integer 
+     */
+    public function getSuanUnit()
+    {
+        return $this->suanUnit;
+    }
 }

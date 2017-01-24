@@ -307,6 +307,19 @@ class DefaultController extends Controller
 
         $repository = $this->getDoctrine()->getRepository('ShopBundle:Product');
         $productshiti = $repository->find($productId);
+        if($productshiti->getIsSale()){
+            if($this->getUser()->getIsAutonomo()){
+                $price = $productshiti->getDiscountPriceA();
+            }else{
+                $price = $productshiti->getDiscountPrice();
+            }
+        }else{
+            if($this->getUser()->getIsAutonomo()){
+                $price = $productshiti->getPriceA();
+            }else{
+                $price = $productshiti->getPrice();
+            }
+        }
         $repository = $this->getDoctrine()->getRepository('ShopBundle:Color');
         $colorshiti = $repository->find($colorId);
 
@@ -327,7 +340,9 @@ class DefaultController extends Controller
                 ->setColorId($colorId)
                 ->setColorName($colorshiti->getColorNameEs())
                 ->setFoto($colorshiti->getColorFoto())
-                ->setSizeName($sizeName);
+                ->setSizeName($sizeName)
+                ->setPrice($price)
+            ;
             $cart->addCartItem($newCartItem);
             $em->persist($newCartItem);
             $em->flush();

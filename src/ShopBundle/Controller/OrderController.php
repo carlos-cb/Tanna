@@ -88,16 +88,26 @@ class OrderController extends Controller
 
         foreach($cartItems as $cartItem)
         {
+            $quantity = $cartItem->getQuantity();
+            $product = $cartItem->getProduct();
+            if($product->getIsOferta()){
+                $quantityNow = $product->getSuanUnit() * floor($quantity/$product->getMaiUnit()) + $quantity%$product->getMaiUnit();
+                $total = $quantityNow * $cartItem->getPrice();
+            }else{
+                $total = $quantity * $cartItem->getPrice();
+            }
             $orderItem = new OrderItem();
-            $orderItem->setQuantity($cartItem->getQuantity())
+            $orderItem->setQuantity($quantity)
                 ->setOrderInfo($orderInfo)
                 ->setSizeName($cartItem->getSizeName())
                 ->setColorId($cartItem->getColorId())
                 ->setColorName($cartItem->getColorName())
                 ->setFoto($cartItem->getFoto())
-                ->setProduct($cartItem->getProduct());
+                ->setProduct($product)
+                ->setPrice($cartItem->getPrice())
+                ->setTotal($total)
+            ;
             $orderInfo->addOrderItem($orderItem);
-
             $em->persist($orderItem);
         }
         $em->flush();
@@ -122,15 +132,14 @@ class OrderController extends Controller
         $cartItems = $user->getCart()->getCartItems();
         $priceall = 0;
 
-
         foreach($cartItems as $cartItem)
         {
-            if($user->getIsAutonomo()) {
-                $priceUnit = $cartItem->getProduct()->getPriceA();
-            }else{
-                $priceUnit = $cartItem->getProduct()->getPrice();
+            $quantity = $cartItem->getQuantity();
+            $product = $cartItem->getProduct();
+            if($product->getIsOferta()){
+                $quantity = $product->getSuanUnit() * floor($quantity/$product->getMaiUnit()) + $quantity%$product->getMaiUnit();
             }
-            $priceall += ($cartItem->getQuantity() * $priceUnit);
+            $priceall += ($quantity * $cartItem->getPrice());
         }
         return $priceall;
     }

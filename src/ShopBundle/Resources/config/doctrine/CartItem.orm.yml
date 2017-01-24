@@ -22,6 +22,8 @@ ShopBundle\Entity\CartItem:
         foto:
             type: string
             length: 255
+        price:
+            type: float
     manyToOne:
         cart:
             targetEntity: Cart

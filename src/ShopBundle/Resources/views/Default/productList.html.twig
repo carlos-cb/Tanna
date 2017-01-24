@@ -37,7 +37,32 @@
                             <br>
                         {% endif %}
                         <a class="" href="{{ path('shop_productDetail', { 'product': product.id, 'colorId': 1 }) }}">{{ product.productNameEs }}</a>
-                        <div class="price _product-price"><span>{% if userNow.isAutonomo is defined and userNow.isAutonomo %}{{ product.priceA|number_format(2, '.', ',') }}{% else %}{{ product.price|number_format(2, '.', ',') }}{% endif %} EUR</span></div>
+                        <div class="price _product-price">
+                            <span>
+                                {% if product.isSale == 1 %}
+                                    {% if userNow.isAutonomo is defined and userNow.isAutonomo %}
+                                        <span class="sale">{{ product.discountPriceA|number_format(2, '.', ',') }} EUR</span>
+                                    {% else %}
+                                        <span class="sale">{{ product.discountPrice|number_format(2, '.', ',') }} EUR</span>
+                                    {% endif %}
+
+                                    {% if userNow.isAutonomo is defined and userNow.isAutonomo %}
+                                        <span class="line-through">{{ product.priceA|number_format(2, '.', ',') }} EUR</span>
+                                    {% else %}
+                                        <span class="line-through">{{ product.price|number_format(2, '.', ',') }} EUR</span>
+                                    {% endif %}
+                                {% else %}
+                                    {% if userNow.isAutonomo is defined and userNow.isAutonomo %}
+                                        <span class="">{{ product.priceA|number_format(2, '.', ',') }} EUR</span>
+                                        {% else %}
+                                        <span class="">{{ product.price|number_format(2, '.', ',') }} EUR</span>
+                                    {% endif %}
+                                {% endif %}&nbsp;&nbsp;
+                                {% if product.isOferta == 1 %}
+                                    <span style="color: red">{{ product.maiUnit }} X {{ product.suanUnit }}</span><br>
+                                {% endif %}
+                            </span>
+                        </div>
                     </div>
                 </div>
             {% endfor %}
