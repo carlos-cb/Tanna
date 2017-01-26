@@ -37,6 +37,7 @@
                             <br>
                         {% endif %}
                         <a class="" href="{{ path('shop_productDetail', { 'product': product.id, 'colorId': 1 }) }}">{{ product.productNameEs }}</a>
+                    {% if userNow.username is defined %}
                         <div class="price _product-price">
                             <span>
                                 {% if product.isSale == 1 %}
@@ -63,6 +64,7 @@
                                 {% endif %}
                             </span>
                         </div>
+                    {% endif %}
                     </div>
                 </div>
             {% endfor %}
