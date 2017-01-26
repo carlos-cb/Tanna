@@ -21,7 +21,6 @@
         </div>
         <div class="menu">
             <ul class="category">
-                <li class="nuevo"><a href="{{ path('shop_productList_new') }}">NOVEDADES</a></li>
                 {% for category in categories %}
                     <li class=""><a href="{{ path('shop_productList', { 'category': category.id }) }}">{{ category.categoryNameEs }}</a></li>
                 {% endfor %}

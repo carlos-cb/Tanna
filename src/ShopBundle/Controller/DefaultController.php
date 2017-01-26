@@ -99,8 +99,28 @@ class DefaultController extends Controller
 
         $category = new Category();
         $category->setCategoryNameEs('NOVEDADES');
-        
+
         $query = $em->createQuery("SELECT p FROM ShopBundle:Product p WHERE p.isNew=1 and p.isShow=1");
+        $products = $query->getResult();
+
+        return $this->render('ShopBundle:Default:productlist.html.twig', array(
+            'category' => $category,
+            'products' => $products,
+            'categories' => $categories,
+            'userNow' => $userNow,
+        ));
+    }
+
+    public function productListSaleAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository('ShopBundle:Category')->findAll();
+        $userNow = $this->getUser();
+
+        $category = new Category();
+        $category->setCategoryNameEs('REBAJAS');
+
+        $query = $em->createQuery("SELECT p FROM ShopBundle:Product p WHERE p.isSale=1 or p.isOferta=1");
         $products = $query->getResult();
 
         return $this->render('ShopBundle:Default:productlist.html.twig', array(
