@@ -19,6 +19,8 @@ ShopBundle\Entity\Category:
             type: string
             length: 255
             nullable: true
+        times:
+            type: integer
     oneToMany:
         products:
             targetEntity: Product

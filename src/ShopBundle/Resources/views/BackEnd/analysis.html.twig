@@ -1,0 +1,152 @@
+{% extends 'ShopBundle:BackEnd:index.html.twig' %}
+
+{% block menuslide %}
+    <ul class="nav nav-sidebar">
+        <li><a href="{{ path('shop_homepage_admin') }}"><i class="fa fa-tachometer" aria-hidden="true"></i> &nbsp;Visión Genenal  <span class="sr-only">(current)</span></a></li>
+        <li><a href="#"><i class="fa fa-info" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;&nbsp;Informe</a></li>
+        <li class="active"><a href="{{ path('shop_analysis') }}"><i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp; Análisis</a></li>
+    </ul>
+    <ul class="nav nav-sidebar">
+        <li><a href="{{ path('user_index') }}"><i class="fa fa-users" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Usuarios</a></li>
+        <li><a href="{{ path('category_index') }}"><i class="fa fa-columns" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Categorías</a></li>
+        <li><a href="{{ path('product_index') }}"><i class="fa fa-female" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Gestión de Productos</a></li>
+        <li><a href="{{ path('select_new') }}"><i class="fa fa-heart" aria-hidden="true"></i> &nbsp;&nbsp;Selección Nuevos</a></li>
+        <li><a href="{{ path('sale_index') }}"><i class="fa fa-bell" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Ofertas</a></li>
+        <li><a href="{{ path('orderinfo_index') }}"><i class="fa fa-credit-card" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Pedidos</a></li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <h1 class="sub-header">Análisis de comportamiento de usuario</h1>
+    <br>
+    <span style="font-size: 24px;font-weight:600;margin-right:100px;">Hot Products</span>
+    <div class="col-md-12">
+        <canvas id="myChart2" width="800" height="350"></canvas>
+    </div>
+    <br><br><br>
+    <span style="font-size: 24px;font-weight:600;margin-right:100px;">Hot Categorias</span>
+    <div class="col-md-12">
+        <canvas id="myChart3" width="800" height="350"></canvas>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        var ctz = document.getElementById("myChart2");
+
+        var myChart2 = new Chart(ctz, {
+            type: 'bar',
+            data: {
+                labels: [
+                    {% for product in products|slice(0, 9) %}
+                    "{{ product.code }}"
+                    {% if not loop.last %},{% endif %}
+                    {% endfor %}
+                ],
+                datasets: [{
+                    label: 'Veces de Visto',
+                    data: [
+                        {% for product in products|slice(0, 9) %}
+                        "{{ product.times }}"
+                        {% if not loop.last %},{% endif %}
+                        {% endfor %}
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true,
+                            stepSize: 1
+                        }
+                    }]
+                }
+            }
+        });
+
+        var cta = document.getElementById("myChart3");
+
+        var myChart3 = new Chart(cta, {
+            type: 'bar',
+            data: {
+                labels: [
+                    {% for category in categories|slice(0, 9) %}
+                    "{{ category.categoryNameEs }}"
+                    {% if not loop.last %},{% endif %}
+                    {% endfor %}
+                ],
+                datasets: [{
+                    label: 'Veces de Visto',
+                    data: [
+                        {% for category in categories|slice(0, 9) %}
+                        "{{ category.times }}"
+                        {% if not loop.last %},{% endif %}
+                        {% endfor %}
+                    ],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255,99,132,1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true,
+                            stepSize: 1
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+{% endblock %}

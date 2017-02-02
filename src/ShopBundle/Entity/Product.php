@@ -601,4 +601,32 @@ class Product
     {
         return $this->suanUnit;
     }
+    /**
+     * @var integer
+     */
+    private $times;
+
+
+    /**
+     * Set times
+     *
+     * @param integer $times
+     * @return Product
+     */
+    public function setTimes($times)
+    {
+        $this->times = $times;
+
+        return $this;
+    }
+
+    /**
+     * Get times
+     *
+     * @return integer 
+     */
+    public function getTimes()
+    {
+        return $this->times;
+    }
 }

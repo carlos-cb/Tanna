@@ -10,14 +10,21 @@
     {% include 'ShopBundle:Public:header.html.twig' %}
 
     <div class="container">
-        <div class="col-xs-12">
-            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="margin-bottom: 80px;">
+        <div class="col-xs-12" style="padding-right: 0;padding-left: 0;margin-bottom: 60px;">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
-                    <img src="{{ asset('bundles/shop/img/slider1.jpg') }}">
+                        <a href="{{ path('shop_productList_sale') }}">
+                            <img src="{{ asset('bundles/shop/img/slider1.jpg') }}">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="{{ path('shop_productList_new') }}">
+                            <img src="{{ asset('bundles/shop/img/slider2.jpg') }}">
+                        </a>
+                    </div>
                 </div>
             </div>
-
             <!-- Controls -->
             <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
                 <span class="glyphicon glyphicon-chevron-left"></span>
@@ -28,7 +35,7 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-    </div>
+
         <section class="home-block grid2">
             <h4 class="hs1" style="display: none;">NOVEDADES</h4>
             <h1 class="ha1">Última Semana</h1>

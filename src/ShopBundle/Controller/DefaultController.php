@@ -79,10 +79,26 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $categories = $em->getRepository('ShopBundle:Category')->findAll();
         $userNow = $this->getUser();
+        $category->setTimes($category->getTimes()+1);
+        $em->persist($category);
+        $em->flush();
+
+        $categoryId = $category->getId();
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $array = unserialize($userNow->getTimesCategory());
+            if(array_key_exists($categoryId, $array)){
+                $array[$categoryId]++;
+            }else{
+                $array[$categoryId] = 1;
+            };
+            $userNow->setTimesCategory(serialize($array));
+            $em->persist($userNow);
+            $em->flush();
+        }
 
         $query = $em->createQuery("SELECT p FROM ShopBundle:Product p WHERE p.category=$category and p.isShow=1");
         $products = $query->getResult();
-        
+
         return $this->render('ShopBundle:Default:productList.html.twig', array(
             'category' => $category,
             'products' => $products,
@@ -139,6 +155,9 @@ class DefaultController extends Controller
 
         $colors = $product->getColors();
         $color = $colors[$colorId-1];
+        $product->setTimes($product->getTimes()+1);
+        $em->persist($product);
+        $em->flush();
 
         return $this->render('ShopBundle:Default:productDetail.html.twig', array(
             'product' => $product,
@@ -384,5 +403,31 @@ class DefaultController extends Controller
             $em->flush();
         }
         return new Response();
+    }
+    
+    public function analysisAction()
+    {
+        $repository = $this->getDoctrine()
+            ->getRepository('ShopBundle:Product');
+
+        $query = $repository->createQueryBuilder('p')
+            ->orderBy('p.times', 'DESC')
+            ->getQuery();
+
+        $products = $query->getResult();
+
+        $repository = $this->getDoctrine()
+            ->getRepository('ShopBundle:Category');
+
+        $query = $repository->createQueryBuilder('q')
+            ->orderBy('q.times', 'DESC')
+            ->getQuery();
+
+        $categories = $query->getResult();
+
+        return $this->render('ShopBundle:BackEnd:analysis.html.twig', array(
+            'products' => $products,
+            'categories' => $categories,
+        ));
     }
 }

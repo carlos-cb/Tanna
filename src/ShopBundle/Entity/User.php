@@ -137,4 +137,40 @@ class User extends BaseUser
     {
         return $this->isAutonomo;
     }
+    /**
+     * @var array
+     */
+    protected $timesCategory;
+
+
+    /**
+     * Set timesCategory
+     *
+     * @param array $timesCategory
+     * @return User
+     */
+    public function setTimesCategory($timesCategory)
+    {
+        $this->timesCategory = $timesCategory;
+
+        return $this;
+    }
+
+    /**
+     * Get timesCategory
+     *
+     * @return array 
+     */
+    public function getTimesCategory()
+    {
+        return $this->timesCategory;
+    }
+
+    public function getTimes()
+    {
+        $timesCategory = $this->timesCategory;
+        $array = unserialize($timesCategory);
+
+        return $array;
+    }
 }

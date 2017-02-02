@@ -26,3 +26,7 @@ user_delete:
 user_enable:
     path:     /{id}/enable
     defaults: { _controller: "ShopBundle:User:enable" }
+
+user_favorito:
+    path:     /{id}/favorito
+    defaults: { _controller: "ShopBundle:User:favorito" }

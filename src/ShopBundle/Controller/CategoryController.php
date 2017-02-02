@@ -40,6 +40,8 @@ class CategoryController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $category->setTimes(0);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($category);
             $em->flush();

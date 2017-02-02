@@ -11,6 +11,8 @@ ShopBundle\Entity\User:
     fields:
         isAutonomo:
             type: boolean
+        timesCategory:
+            type: array
     oneToOne:
         cart:
             targetEntity: Cart

@@ -61,3 +61,7 @@ shop_homepage:
 shop_homepage_admin:
     path:     /admin
     defaults: { _controller: ShopBundle:Default:backEnd }
+
+shop_analysis:
+    path:     /admin/analysis
+    defaults: { _controller: ShopBundle:Default:analysis }

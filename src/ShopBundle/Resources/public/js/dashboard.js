@@ -129,8 +129,8 @@ var myChart = new Chart(ctx, {
     }
 });
 
-var ctx1 = document.getElementById("myChart1");
-var myChart1 = new Chart(ctx1, {
+var cty = document.getElementById("myChart1");
+var myChart1 = new Chart(cty, {
     type: 'bar',
     data: {
         labels: ["Día-6", "Día-5", "Día-4", "Anteayer", "Ayer", "Hoy"],

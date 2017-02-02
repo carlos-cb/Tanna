@@ -157,4 +157,32 @@ class Category
     public function __toString() {
         return strval($this->id);
     }
+    /**
+     * @var integer
+     */
+    private $times;
+
+
+    /**
+     * Set times
+     *
+     * @param integer $times
+     * @return Category
+     */
+    public function setTimes($times)
+    {
+        $this->times = $times;
+
+        return $this;
+    }
+
+    /**
+     * Get times
+     *
+     * @return integer 
+     */
+    public function getTimes()
+    {
+        return $this->times;
+    }
 }

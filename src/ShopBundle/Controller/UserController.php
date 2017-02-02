@@ -138,4 +138,16 @@ class UserController extends Controller
 
         return $this->redirectToRoute('user_index');
     }
+    
+    public function favoritoAction(User $user)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $categories = $em->getRepository('ShopBundle:Category')->findAll();
+
+        return $this->render('user/favorito.html.twig', array(
+            'user' => $user,
+            'categories' => $categories,
+        ));
+    }
 }

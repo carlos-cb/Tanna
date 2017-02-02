@@ -47,6 +47,8 @@ ShopBundle\Entity\Product:
             type: integer
         suanUnit:
             type: integer
+        times:
+            type: integer
     oneToMany:
         colors:
             targetEntity: Color

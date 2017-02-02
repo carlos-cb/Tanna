@@ -40,7 +40,7 @@ class ProductController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $product->setDiscountPrice($product->getPrice())->setIsSale(false)->setIsOferta(false)->setMaiUnit(0)->setSuanUnit(0);
+            $product->setDiscountPrice($product->getPrice())->setIsSale(false)->setIsOferta(false)->setMaiUnit(0)->setSuanUnit(0)->setTimes(0);
             $file = $product->getFoto();
             $fileName = $this->get('shop.foto_uploader')->upload($file);
             $product->setFoto($fileName);

@@ -4,7 +4,7 @@
     <ul class="nav nav-sidebar">
         <li><a href="{{ path('shop_homepage_admin') }}"><i class="fa fa-tachometer" aria-hidden="true"></i> &nbsp;Visión Genenal  <span class="sr-only">(current)</span></a></li>
         <li><a href="#"><i class="fa fa-info" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;&nbsp;Informe</a></li>
-        <li><a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp; Análisis</a></li>
+        <li><a href="{{ path('shop_analysis') }}"><i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp; Análisis</a></li>
     </ul>
     <ul class="nav nav-sidebar">
         <li class="active"><a href="{{ path('user_index') }}"><i class="fa fa-users" aria-hidden="true"></i> &nbsp;&nbsp;Gestión de Usuarios</a></li>
@@ -36,6 +36,7 @@
             <th>Pedidos</th>
             <th>Consumo Total</th>
             <th>Autónomo</th>
+            <th>Favorito</th>
         </tr>
         </thead>
         <tbody>
@@ -57,6 +58,7 @@
                 <td><a class="button button-tiny button-primary" href="{{ path('orderinfo_indexUser', { 'user': user.id }) }}">Ver</a></td>
                 <td>{{ user.OrderInfoSum|number_format(2, '.', ',') }} €</td>
                 <td>{% if user.isAutonomo %}Si{% else %}No{% endif %}</td>
+                <td><a class="button button-tiny button-caution" href="{{ path('user_favorito', { 'id': user.id }) }}">Ver</a></td>
             </tr>
         {% endfor %}
         </tbody>
