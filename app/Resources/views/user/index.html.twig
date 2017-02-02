@@ -22,13 +22,14 @@
     <ul>
         <li>
             <a href="{{ path('user_new') }}" class="button button-rounded button-inverse">Crear Nuevo</a>
+            <a data-path="{{ path('user_sendEmails') }}" class="button button-rounded button-inverse email">Enviar E-mails</a>
         </li>
     </ul>
     <br>
     <table class="table table-bordered table-striped table-hover">
         <thead>
         <tr>
-            <th>ID</th>
+            <th><input id="selectAll" type="checkbox"></th>
             <th>Nombre</th>
             <th>Correo</th>
             <th>Activado</th>
@@ -42,9 +43,9 @@
         <tbody>
         {% for user in users %}
             <tr>
-                <td>{{ user.id }}</td>
+                <td><input id="checkbox" type="checkbox"></td>
                 <td>{{ user.username }}</td>
-                <td>{{ user.email }}</td>
+                <td class="email">{{ user.email }}</td>
                 <td>
                     {% if user.enabled %}
                         Sí <br>

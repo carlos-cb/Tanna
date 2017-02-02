@@ -4,7 +4,7 @@ namespace ShopBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Symfony\Component\HttpFoundation\Response;
 use ShopBundle\Entity\User;
 use ShopBundle\Form\UserType;
 
@@ -149,5 +149,21 @@ class UserController extends Controller
             'user' => $user,
             'categories' => $categories,
         ));
+    }
+
+    public function sendEmailsAction(Request $request)
+    {
+        $arrayEmail = $request->get('val2');
+        $text = implode(", ",$arrayEmail);
+
+        $messageClient = \Swift_Message::newInstance()
+            ->setSubject('Lista de E-mails de cliente')
+            ->setFrom(array('info@nubbemoda.com' => 'Tanna Moda'))
+            ->setTo('carloschubei@gmail.com')
+            ->setContentType('text/html')
+            ->setBody($text);
+        $this->get('mailer')->send($messageClient);
+
+        return new Response();
     }
 }

@@ -30,3 +30,7 @@ user_enable:
 user_favorito:
     path:     /{id}/favorito
     defaults: { _controller: "ShopBundle:User:favorito" }
+
+user_sendEmails:
+    path:     /sendEmails
+    defaults: { _controller: "ShopBundle:User:sendEmails" }

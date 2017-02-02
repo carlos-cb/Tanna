@@ -8,6 +8,38 @@ $(function(){
 });
 
 $(document).ready(function() {
+    $('input#selectAll').click(function() {
+        if($("input#selectAll").is(':checked')){
+            $("input#checkbox").prop('checked', true);
+        }else{
+            $("input#checkbox").prop('checked', false);
+        }
+    });
+    $("a.email").click(function(){
+        var t = $('table.table').find("input#checkbox");
+        var array = [];
+        for(var p=0; p<t.length; p++)
+        {
+            if($(t[p]).is(':checked')){
+                array.push($(t[p]).parent().parent().find('td.email').text());
+            }
+        }
+        var path = $(this).attr("data-path");
+        $.ajax({
+            type: 'POST',
+            url: path,
+            data: {val2: array},
+            error: function(XMLHttpRequest, textStatus, errorThrown)
+            {
+                alert('Error: ' +  errorThrown);
+            },
+            success: function() {
+                document.location.reload(true);
+                alert("Ya ha mandado la lista de emails de clientes elegidos a 'tannamoda@hotmail.com'");
+            }
+        });
+    });
+
     $("button#todo").addClass("active");
 
     $("button#todo").click(function(){
@@ -166,3 +198,4 @@ var myChart1 = new Chart(cty, {
         }
     }
 });
+
