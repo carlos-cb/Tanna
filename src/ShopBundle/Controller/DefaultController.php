@@ -411,7 +411,7 @@ class DefaultController extends Controller
             ->getRepository('ShopBundle:Product');
 
         $query = $repository->createQueryBuilder('p')
-            ->orderBy('p.times', 'ASC')
+            ->orderBy('p.times', 'DESC')
             ->getQuery();
 
         $products = $query->getResult();
@@ -420,7 +420,7 @@ class DefaultController extends Controller
             ->getRepository('ShopBundle:Category');
 
         $query = $repository->createQueryBuilder('q')
-            ->orderBy('q.times', 'DASC')
+            ->orderBy('q.times', 'DESC')
             ->getQuery();
 
         $categories = $query->getResult();

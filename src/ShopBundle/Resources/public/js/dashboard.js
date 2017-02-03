@@ -16,7 +16,9 @@ $(document).ready(function() {
         }
     });
     $("a.email").click(function(){
+        $(this).addClass("disabled");
         var t = $('table.table').find("input#checkbox");
+
         var array = [];
         for(var p=0; p<t.length; p++)
         {
@@ -24,20 +26,25 @@ $(document).ready(function() {
                 array.push($(t[p]).parent().parent().find('td.email').text());
             }
         }
-        var path = $(this).attr("data-path");
-        $.ajax({
-            type: 'POST',
-            url: path,
-            data: {val2: array},
-            error: function(XMLHttpRequest, textStatus, errorThrown)
-            {
-                alert('Error: ' +  errorThrown);
-            },
-            success: function() {
-                document.location.reload(true);
-                alert("Ya ha mandado la lista de emails de clientes elegidos a 'tannamoda@hotmail.com'");
-            }
-        });
+        if(array.length == 0){
+            alert("Hay que elegir por lo menos uno cliente.");
+            $(this).removeClass("disabled");
+        }else{
+            var path = $(this).attr("data-path");
+            $.ajax({
+                type: 'POST',
+                url: path,
+                data: {val2: array},
+                error: function(XMLHttpRequest, textStatus, errorThrown)
+                {
+                    alert('Error: ' +  errorThrown);
+                },
+                success: function() {
+                    document.location.reload(true);
+                    alert("Ya ha mandado la lista de emails de clientes elegidos a 'tannamoda@hotmail.com'");
+                }
+            });
+        }
     });
 
     $("button#todo").addClass("active");
