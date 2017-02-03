@@ -147,6 +147,36 @@ class DefaultController extends Controller
         ));
     }
 
+    public function productListSearchAction()
+    {
+        $request = $this->getRequest();
+        $p = $request->query->get('q');
+        $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository('ShopBundle:Category')->findAll();
+        $userNow = $this->getUser();
+
+        $category = new Category();
+        $category->setCategoryNameEs('RESULTADOS');
+
+        $repository = $this->getDoctrine()
+            ->getRepository('ShopBundle:Product');
+
+        $query = $repository->createQueryBuilder('p')
+            ->Where('p.productNameEs LIKE :busca')
+            ->orWhere('p.code LIKE :busca')
+            ->setParameter('busca',"%$p%")
+            ->getQuery();
+
+        $products = $query->getResult();
+
+        return $this->render('ShopBundle:Default:productlist.html.twig', array(
+            'category' => $category,
+            'products' => $products,
+            'categories' => $categories,
+            'userNow' => $userNow,
+        ));
+    }
+    
     public function productDetailAction(Product $product, $colorId)
     {
         $em = $this->getDoctrine()->getManager();

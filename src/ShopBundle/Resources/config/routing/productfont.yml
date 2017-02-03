@@ -10,6 +10,10 @@ shop_productList_sale:
     path:     /productListSale
     defaults: { _controller: ShopBundle:Default:productListSale }
 
+shop_productList_search:
+    path:     /productListSearch
+    defaults: { _controller: ShopBundle:Default:productListSearch }
+
 shop_productDetail:
     path:     /productDetail/{product}/{colorId}
     defaults: { _controller: ShopBundle:Default:productDetail }
