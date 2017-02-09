@@ -460,4 +460,30 @@ class DefaultController extends Controller
             'categories' => $categories,
         ));
     }
+
+    public function clearProductAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $products = $em->getRepository('ShopBundle:Product')->findAll();
+        foreach ($products as $product){
+            $product->setTimes(0);
+            $em->persist($product);
+        }
+        $em->flush();
+
+        return $this->redirectToRoute('shop_analysis');
+    }
+
+    public function clearCategoryAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository('ShopBundle:Category')->findAll();
+        foreach ($categories as $category){
+            $category->setTimes(0);
+            $em->persist($category);
+        }
+        $em->flush();
+
+        return $this->redirectToRoute('shop_analysis');
+    }
 }

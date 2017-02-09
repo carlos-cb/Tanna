@@ -10,7 +10,7 @@ $(function(){
 $(document).ready(function() {
     $('input#selectAll').click(function() {
         if($("input#selectAll").is(':checked')){
-            $("input#checkbox").prop('checked', true);
+            $("input#checkbox").filter(":visible").prop('checked', true);
         }else{
             $("input#checkbox").prop('checked', false);
         }

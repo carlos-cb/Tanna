@@ -65,3 +65,11 @@ shop_homepage_admin:
 shop_analysis:
     path:     /admin/analysis
     defaults: { _controller: ShopBundle:Default:analysis }
+
+shop_analysis_clearProduct:
+    path:     /admin/analysis/clearProduct
+    defaults: { _controller: ShopBundle:Default:clearProduct }
+
+shop_analysis_clearCategory:
+    path:     /admin/analysis/clearCategory
+    defaults: { _controller: ShopBundle:Default:clearCategory }
