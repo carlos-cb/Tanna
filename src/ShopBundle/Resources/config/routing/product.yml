@@ -3,6 +3,11 @@ product_index:
     defaults: { _controller: "ShopBundle:Product:index" }
     methods:  GET
 
+product_indexNomostrado:
+    path:     /Nomostrado
+    defaults: { _controller: "ShopBundle:Product:indexNomostrado" }
+    methods:  GET
+
 product_show:
     path:     /{id}/show
     defaults: { _controller: "ShopBundle:Product:show" }

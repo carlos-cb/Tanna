@@ -22,6 +22,11 @@
     <ul>
         <li>
             <a href="{{ path('product_new') }}" class="button button-rounded button-inverse">Crear Nuevo</a>
+            {% if isShow %}
+                <a href="{{ path('product_indexNomostrado') }}" class="button button-rounded button-inverse">No Mostrados</a>
+            {% else %}
+                <a href="{{ path('product_index') }}" class="button button-rounded button-inverse">Mostrados</a>
+            {% endif %}
         </li>
     </ul>
     <br>

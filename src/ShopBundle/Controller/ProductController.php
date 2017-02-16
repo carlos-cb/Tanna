@@ -22,10 +22,27 @@ class ProductController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $products = $em->getRepository('ShopBundle:Product')->findAll();
+        $products = $em->getRepository('ShopBundle:Product')->findByIsShow(true);
 
         return $this->render('product/index.html.twig', array(
             'products' => $products,
+            'isShow' => true,
+        ));
+    }
+
+    /**
+     * Lists all Product entities.
+     *
+     */
+    public function indexNomostradoAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $products = $em->getRepository('ShopBundle:Product')->findByIsShow(false);
+
+        return $this->render('product/index.html.twig', array(
+            'products' => $products,
+            'isShow' => false,
         ));
     }
 
